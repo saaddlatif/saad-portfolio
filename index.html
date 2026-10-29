@@ -252,6 +252,8 @@ footer{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-s
 .rfig{margin:0 0 32px}.rfig .rimg{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}.rfig img{display:block;width:100%;height:auto}.rfig figcaption{margin-top:12px;font-size:14.5px;color:var(--muted);max-width:68ch}
 .tcover.b{background:linear-gradient(140deg,#2a1b5c,#6d3fd6)}
 .tcover.d{background:linear-gradient(140deg,#14143a,#3b3b8f)}
+.tcover.s{background:linear-gradient(140deg,#1d2045,#2b2f5c)}
+.tcover.k{background:linear-gradient(140deg,#0d2e24,#1f6b4f)}
 .ui{position:absolute;left:0;top:0;width:1200px;height:750px;transform-origin:0 0;display:flex;overflow:hidden;background:#fff;color:#1b1c20;font:14px/1.4 var(--f-body);text-align:left}
 .ui aside{width:210px;flex:none;padding:22px 14px;display:flex;flex-direction:column;gap:3px;border-right:1px solid #ececef;background:#fbfbfc}
 .ui aside .lg{display:flex;align-items:center;gap:9px;margin:0 6px 24px;font-weight:600;font-size:16px;letter-spacing:-.01em}
@@ -691,7 +693,16 @@ CASES.find(c=>c.id==='throughput').research=[[IMGS.dlExplore,'User management ex
 CASES.find(c=>c.id==='kanz').img=[IMGS.kzDash,IMGS.kzCopilot,IMGS.kzExplore];
 CASES.find(c=>c.id==='quantus').img=['images/quantus-showcase.png','images/quantus-dashboard.png'];
 CASES.find(c=>c.id==='chakor').tc=['c','Live website · thechakor.com','The Chakor','Designed and shipped in six weeks'];
-const imgFrame=(src)=>`<div class="frame"><div class="chrome"><i></i><i></i><i></i></div><div class="shot"><img class="shotimg" src="${src}" alt="" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'imgslot',textContent:'Add '+this.getAttribute('src')}))"></div></div>`;
+const TCV={outlook:'s',shortlist:'b',throughput:'d',kanz:'k',quantus:'q',chakor:'c'};
+window.imgMiss=function(img){
+  const item=img.closest('.gallery .stage,.rfig');
+  if(item){const sec=item.closest('section');item.remove();if(sec&&!sec.querySelector('.stage,.rfig'))sec.remove();return;}
+  const src=img.getAttribute('src'),c=CASES.find(x=>x.img&&x.img[0]===src),fr=img.closest('.frame');
+  if(!c||!fr){img.remove();return;}
+  const st=fr.parentElement;if(st)st.classList.add('type');
+  fr.outerHTML=`<div class="tcover ${TCV[c.id]||'d'}"><small>${c.y}</small><b>${c.n}</b><span>${c.hook}</span></div>`;
+};
+const imgFrame=(src)=>`<div class="frame"><div class="chrome"><i></i><i></i><i></i></div><div class="shot"><img class="shotimg" src="${src}" alt="" loading="lazy" onerror="imgMiss(this)"></div></div>`;
 const visual=(c)=>c.img?imgFrame(c.img[0]):c.scr?`<div class="frame"><div class="chrome"><i></i><i></i><i></i></div>${shotHTML(c.scr[0])}</div>`:`<div class="tcover ${c.tc[0]}"><small>${c.tc[1]}</small><b>${c.tc[2]}</b><span>${c.tc[3]}</span></div>`;
 
 /* ---------- hero ---------- */
@@ -761,8 +772,8 @@ function openCase(i){
   csCrumb.innerHTML=`Work / <b>${c.n}</b>`;
   const next=CASES[(i+1)%CASES.length];
   const secs=c.secs.map(renderSec);
-  if(c.img){const k=c.secs.findIndex(s=>s.dec);secs.splice(k+1,0,`<section class="sec gallery"><div class="eyebrow">The product</div><div><h3>More screens from the live product</h3>${c.img.slice(1).map(s=>`<div class="stage">${imgFrame(s)}</div>`).join('')}</div></section>`);}
-  if(c.research){secs.splice(1,0,`<section class="sec gallery research"><div class="eyebrow">Research and planning</div><div><h3>What I worked out before the screens</h3>${c.research.map(r=>`<figure class="rfig"><div class="rimg"><img src="${r[0]}" alt="" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'imgslot',textContent:'Add '+this.getAttribute('src')}))"></div><figcaption>${r[1]}</figcaption></figure>`).join('')}</div></section>`);}
+  if(c.img){const k=c.secs.findIndex(s=>s.dec);secs.splice(k+1,0,`<section class="sec gallery"><div class="eyebrow">The product</div><div><h3>More screens from the live product</h3>${c.img.slice(1).map(s=>`<div class="stage">${imgFrame(s).replace(' loading="lazy"','')}</div>`).join('')}</div></section>`);}
+  if(c.research){secs.splice(1,0,`<section class="sec gallery research"><div class="eyebrow">Research and planning</div><div><h3>What I worked out before the screens</h3>${c.research.map(r=>`<figure class="rfig"><div class="rimg"><img src="${r[0]}" alt="" onerror="imgMiss(this)"></div><figcaption>${r[1]}</figcaption></figure>`).join('')}</div></section>`);}
   if(c.scr){const k=c.secs.findIndex(s=>s.dec);secs.splice(k+1,0,`<section class="sec gallery"><div class="eyebrow">The product</div><div><h3>A second screen from the rebuild</h3><div class="stage"><div class="frame"><div class="chrome"><i></i><i></i><i></i></div>${shotHTML(c.scr[1])}</div></div></div></section>`);}
   csBody.innerHTML=`<div class="cs-head"><div class="eyebrow">Case study · Client work</div><h1 id="csTitle">${c.n}</h1><p class="lede">${c.k}</p>
    <div class="metaRow">${c.meta.map(m=>`<div><span>${m[0]}</span>${m[1]}</div>`).join('')}</div>
