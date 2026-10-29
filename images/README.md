@@ -1,6 +1,6 @@
 # Screenshots
 
-Drop each screenshot here as a .png with exactly this name. Missing ones show a striped placeholder.
+Drop each screenshot here as a .png with exactly this name. Missing ones are hidden on the site, so you can add them in any order.
 
 - `signal-desk-overview.png`
 - `signal-desk-outlook.png`
@@ -23,3 +23,6 @@ Drop each screenshot here as a .png with exactly this name. Missing ones show a 
 - `kanz-explorer.png`
 - `quantus-showcase.png`
 - `quantus-dashboard.png`
+- `chakor-home.png`
+- `chakor-work.png`
+- `chakor-services.png`

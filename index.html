@@ -693,6 +693,7 @@ CASES.find(c=>c.id==='throughput').research=[[IMGS.dlExplore,'User management ex
 CASES.find(c=>c.id==='kanz').img=[IMGS.kzDash,IMGS.kzCopilot,IMGS.kzExplore];
 CASES.find(c=>c.id==='quantus').img=['images/quantus-showcase.png','images/quantus-dashboard.png'];
 CASES.find(c=>c.id==='chakor').tc=['c','Live website · thechakor.com','The Chakor','Designed and shipped in six weeks'];
+CASES.find(c=>c.id==='chakor').img=['images/chakor-home.png','images/chakor-work.png','images/chakor-services.png'];
 const TCV={outlook:'s',shortlist:'b',throughput:'d',kanz:'k',quantus:'q',chakor:'c'};
 window.imgMiss=function(img){
   const item=img.closest('.gallery .stage,.rfig');
@@ -700,7 +701,7 @@ window.imgMiss=function(img){
   const src=img.getAttribute('src'),c=CASES.find(x=>x.img&&x.img[0]===src),fr=img.closest('.frame');
   if(!c||!fr){img.remove();return;}
   const st=fr.parentElement;if(st)st.classList.add('type');
-  fr.outerHTML=`<div class="tcover ${TCV[c.id]||'d'}"><small>${c.y}</small><b>${c.n}</b><span>${c.hook}</span></div>`;
+  const t=c.tc||[TCV[c.id]||'d',c.y,c.n,c.hook];fr.outerHTML=`<div class="tcover ${t[0]}"><small>${t[1]}</small><b>${t[2]}</b><span>${t[3]}</span></div>`;
 };
 const imgFrame=(src)=>`<div class="frame"><div class="chrome"><i></i><i></i><i></i></div><div class="shot"><img class="shotimg" src="${src}" alt="" loading="lazy" onerror="imgMiss(this)"></div></div>`;
 const visual=(c)=>c.img?imgFrame(c.img[0]):c.scr?`<div class="frame"><div class="chrome"><i></i><i></i><i></i></div>${shotHTML(c.scr[0])}</div>`:`<div class="tcover ${c.tc[0]}"><small>${c.tc[1]}</small><b>${c.tc[2]}</b><span>${c.tc[3]}</span></div>`;
