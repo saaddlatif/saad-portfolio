@@ -1,5 +1,9 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Saad Rana, product designer. Case studies in AI, analytics and design systems.">
 <title>Saad Rana Portfolio</title>
-<meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400;500;600;700&family=Funnel+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Geist+Mono:wght@400;500&display=swap">
@@ -424,6 +428,73 @@ body.cur-on .mp{display:block}
   .cs,.cs.open{transition:none;transform:none}
   .mate{transition:none}
 }
+/* ---------- playable demos ---------- */
+.demo{border:1px solid var(--line);background:var(--surface);border-radius:14px;padding:18px;display:grid;gap:14px;font-size:14px;max-width:640px}
+.demo-h{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;align-items:center}
+.demo-h .tag{grid-row:span 2;align-self:start;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;background:var(--ink);color:var(--paper);border-radius:999px;padding:4px 9px}
+.demo-h>span:not(.tag){font-weight:600;font-family:var(--f-display);font-size:16px}
+.demo-h small{color:var(--muted);font-size:13px}
+.demo .note{color:var(--muted);font-family:var(--f-mono);font-size:11px}
+.demo button.solid,.demo button.ghost{border-radius:8px;padding:7px 12px;font-size:13.5px;cursor:pointer;border:1px solid var(--ink)}
+.demo button.solid{background:var(--ink);color:var(--paper)}
+.demo button.ghost{background:transparent;border-color:var(--line)}
+.demo input[type=range]{accent-color:var(--accent);width:100%}
+.th-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.sw-b{width:28px;height:28px;border-radius:7px;border:2px solid transparent;cursor:pointer;box-shadow:inset 0 0 0 1px #0000001a}
+.sw-b[aria-pressed=true]{outline:2px solid var(--ink);outline-offset:2px}
+.pick{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:7px;padding:3px 8px 3px 3px;font-size:13px;cursor:pointer}
+.pick input{width:24px;height:22px;border:0;padding:0;background:none;cursor:pointer}
+.th-prev{--b:#f97316;display:grid;grid-template-columns:120px 1fr;border:1px solid var(--line);border-radius:10px;overflow:hidden;font-size:12.5px;background:#fafafa}
+.tp-side{display:grid;align-content:start;gap:4px;padding:12px 8px;border-right:1px solid var(--line);background:#fff}
+.tp-side b{padding:0 8px 8px;font-size:13px}
+.tp-side span{padding:6px 8px;border-radius:6px;color:var(--muted)}
+.tp-side .on{background:color-mix(in srgb,var(--b) 14%,#fff);color:var(--ink);box-shadow:inset 2px 0 0 var(--b);font-weight:600}
+.tp-main{padding:12px;display:grid;gap:8px;align-content:start;min-width:0}
+.tp-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.tp-top button{background:var(--b);color:#fff;border:0;border-radius:6px;padding:6px 10px;font-size:12px;font-weight:600;white-space:nowrap}
+.tp-card{display:flex;gap:8px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:8px;padding:8px 10px}
+.tp-card em{font-style:normal;color:var(--muted);flex:1}
+.tp-card a{color:var(--b);font-weight:600}
+.th-check{display:grid;gap:8px;justify-items:start}
+.th-check .pass{color:var(--ok)}.th-check .fail{color:var(--warn)}
+.fixb{display:inline-flex;gap:8px;align-items:center;border:1px solid var(--line);background:var(--paper);border-radius:7px;padding:6px 10px;cursor:pointer;font-size:13.5px}
+.fixb i{width:14px;height:14px;border-radius:3px;display:inline-block}
+.wgrid{display:grid;grid-template-columns:200px 1fr;gap:18px;align-items:start}
+.wls{display:grid;gap:10px;justify-items:stretch}
+.wl{display:grid;grid-template-columns:84px 1fr 40px;gap:8px;align-items:center;font-size:13px}
+.wl output{font-family:var(--f-mono);font-size:12px;color:var(--muted);text-align:right}
+.wls .ghost{justify-self:start}
+.rank{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.rank li{display:grid;grid-template-columns:18px 92px 1fr 26px 74px;gap:8px;align-items:center;font-size:13px}
+.rank .n{font-family:var(--f-mono);color:var(--muted)}
+.rank .pg{font-family:var(--f-mono);font-size:12px}
+.rank .bar{height:8px;background:var(--stage);border-radius:4px;overflow:hidden}
+.rank .bar i{display:block;height:100%;transition:width .3s}
+.rank .sc{font-family:var(--f-mono);font-size:12px;text-align:right}
+.rank .band{font-size:11.5px;border:1px solid var(--c);border-radius:5px;padding:2px 6px;text-align:center;background:color-mix(in srgb,var(--c) 14%,transparent)}
+.bp-card{display:grid;gap:12px}
+.bp-who{display:grid}.bp-who span{color:var(--muted);font-size:13px}
+.demo .flow span{transition:background .2s,color .2s,opacity .2s}
+.demo .flow .done{background:var(--stage);color:var(--muted)}
+.demo .flow .cur{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.demo .flow .off{opacity:.35;text-decoration:line-through}
+.bp-note{margin:0;color:var(--muted);min-height:1.5em}
+.bp-act{display:flex;gap:8px;flex-wrap:wrap}
+.kz-ctl{display:grid;gap:10px;max-width:420px}
+.kz-ctl .wl{grid-template-columns:100px 1fr 48px}
+.kz-bars{display:grid;gap:8px}
+.kz-row{display:grid;grid-template-columns:70px 1fr;gap:8px;align-items:center;font-size:12.5px;color:var(--muted)}
+.kz-bar{display:flex;height:14px;border-radius:4px;overflow:hidden;background:var(--stage)}
+.kz-bar i{display:block;height:100%;transition:width .3s}
+.kz-key{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px}
+.kz-key span{display:inline-flex;gap:6px;align-items:center}.kz-key i{width:10px;height:10px;border-radius:2px;display:inline-block}.kz-key em{font-style:normal;color:var(--muted)}
+.kz-tot{font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+.kz-card{display:grid;gap:4px;border-radius:10px;padding:12px 14px;border:1px solid var(--line)}
+.kz-card.calm{background:var(--paper)}.kz-card.calm b{color:var(--ok)}
+.kz-card.act{background:#fff7ed;border-color:#fed7aa}.kz-card.act b{color:var(--warn)}
+.kz-card span{color:var(--ink)}
+@media (max-width:640px){.wgrid{grid-template-columns:1fr}.th-prev{grid-template-columns:1fr}.tp-side{display:none}.rank li{grid-template-columns:16px 84px 1fr 24px 66px}}
+@media (prefers-reduced-motion:reduce){.rank .bar i,.kz-bar i,.demo .flow span{transition:none}}
 </style>
 
 <nav class="nav" id="nav">
@@ -650,7 +721,7 @@ const CASES=[
    {l:'Who it is for',h:'Three people, and we build for the first one.',p:['A: the salary-earner, 24 to 38, who wants savings to beat inflation and cannot work out what the fund earned. B: the curious diversifier who wants 5 to 20 percent in shares and crypto but fears losing it. C: the Shariah-conscious beginner who would rather leave money idle than buy something unverified.'],quote:'I have Binance open on my phone. I have no idea how much is too much.'},
    {l:'Key decisions',dec:[
      {h:'Advise, never move money',p:'Kanz adds up everything and tells you what to do. It never holds or trades your money. Buying and selling for users needs a broker licence from SECP; advice does not. That one choice shaped onboarding, the copilot and every screen after it.',why:'<b>Why:</b> it made the product shippable in 45 days and kept users in control.'},
-     {h:'A rule people can check, not a black box',p:'Each risk profile has a target mix. If any type drifts more than 5 points from target, a card appears with the exact rupee amount to move and the steps to do it yourself. "6.0 is above 5.0", shown on the card.',why:'<b>Why:</b> with money, the same numbers must always give the same answer, and you must be able to see why.'},
+     {h:'A rule people can check, not a black box',p:'Each risk profile has a target mix. If any type drifts more than 5 points from target, a card appears with the exact rupee amount to move and the steps to do it yourself. "6.0 is above 5.0", shown on the card.',viz:'drift',why:'<b>Why:</b> with money, the same numbers must always give the same answer, and you must be able to see why.'},
      {h:'Never tell anyone to sell',p:'When something falls, the app shows how far it fell, how far the market fell, and the exit plan the user wrote when they bought it. Buy-more prompts are switched off for anything down more than 20 percent until we decide how they should work.'},
      {h:'Rank and explain, never promise',p:'The explorer gives a short scored list with the reasons for each score, and every signal shows how often it has been right in past data. If a signal cannot beat buying and holding, it does not ship.'},
      {h:'Every number says how fresh it is',p:'I tested every price source on one day: two official fund sources block us, so we collect from each fund company instead. Every price carries its time, its source and whether it is stale, so an old price never looks new.'}
@@ -756,6 +827,76 @@ const VIZ={
   contrast:()=>`<div class="warncard"><div class="sw"><i style="background:#f97316">Aa</i><span><b>Brand colour</b> #F97316</span></div><div class="msg">Contrast 3.6:1 against white, below the 4.5:1 minimum. Button labels in this colour will be hard to read.</div><span class="fix"><i style="width:14px;height:14px;border-radius:3px;background:#c2410c;display:inline-block"></i>Use #C2410C instead · 5.2:1</span></div>`,
   states:()=>`<div class="states"><div><b>Link expired</b><span>Contact support to request a new link.</span></div><div><b>Link not found</b><span>Check your email, or contact support.</span></div><div><b>Already completed</b><span>If you didn't finish it, contact support.</span></div></div>`
 };
+/* ---------- playable demos (sample data, my own logic) ---------- */
+const DM={};
+const hexRgb=h=>{h=h.replace('#','');return[0,2,4].map(i=>parseInt(h.substr(i,2),16))};
+const lum=h=>{const[r,g,b]=hexRgb(h).map(v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return .2126*r+.7152*g+.0722*b};
+const ratioW=h=>1.05/(lum(h)+.05);
+const toHsl=h=>{let[r,g,b]=hexRgb(h).map(v=>v/255);const mx=Math.max(r,g,b),mn=Math.min(r,g,b);let hh=0,s=0,l=(mx+mn)/2;if(mx!==mn){const d=mx-mn;s=l>.5?d/(2-mx-mn):d/(mx+mn);hh=mx===r?(g-b)/d+(g<b?6:0):mx===g?(b-r)/d+2:(r-g)/d+4;hh/=6}return[hh,s,l]};
+const fromHsl=(h,s,l)=>{const f=n=>{const k=(n+h*12)%12,a=s*Math.min(l,1-l);return Math.round(255*(l-a*Math.max(-1,Math.min(k-3,9-k,1)))).toString(16).padStart(2,'0')};return'#'+f(0)+f(8)+f(4)};
+const passShade=h=>{const[hh,s,l]=toHsl(h);for(let L=l;L>=0;L-=.005){const c=fromHsl(hh,s,L);if(ratioW(c)>=4.5)return c}return'#000000'};
+const demoHead=(t,s)=>`<div class="demo-h"><span class="tag">Try it</span><span>${t}</span><small>${s}</small></div>`;
+
+/* DevLake: white-label theme with contrast guard */
+DM.theme=el=>{const c=el.dataset.c,r=ratioW(c),ok=r>=4.5,fix=ok?'':passShade(c);
+ el.querySelector('.th-prev').style.setProperty('--b',c);
+ el.querySelector('input[type=color]').value=c;
+ el.querySelectorAll('.sw-b').forEach(b=>b.setAttribute('aria-pressed',b.dataset.v===c));
+ el.querySelector('.th-check').innerHTML=ok?`<span class="pass">✓ ${r.toFixed(1)}:1 against white. Button labels stay readable.</span>`
+  :`<span class="fail">${r.toFixed(1)}:1 against white, below the 4.5:1 minimum. Button labels in this colour will be hard to read.</span><button type="button" class="fixb" data-fix="${fix}"><i style="background:${fix}"></i>Use ${fix.toUpperCase()} instead · ${ratioW(fix).toFixed(1)}:1</button>`;};
+const themeHTML=()=>`<div class="demo" data-demo="theme" data-c="#f97316">${demoHead('White-label theme','Pick a brand colour. The product won\'t let you ship one people can\'t read.')}
+ <div class="th-row"><label class="pick"><input type="color" value="#f97316" aria-label="Brand colour">Custom</label>${['#f97316','#eab308','#22c55e','#0f766e','#3b82f6','#7c3aed','#e11d48'].map(v=>`<button type="button" class="sw-b" data-v="${v}" style="background:${v}" aria-label="${v}"></button>`).join('')}</div>
+ <div class="th-prev"><div class="tp-side"><b>Acme</b><span class="on">Connections</span><span>Projects</span><span>Users</span></div><div class="tp-main"><div class="tp-top"><b>Connections</b><button type="button" tabindex="-1">Add connection</button></div><div class="tp-card"><span>GitHub</span><em>Synced 4 min ago</em><a>Edit</a></div><div class="tp-card"><span>Jira</span><em>Synced 12 min ago</em><a>Edit</a></div></div></div>
+ <div class="th-check" aria-live="polite"></div></div>`;
+
+/* Signal Desk: ranking weights */
+const SD_PAGES=[['/checkout',[90,30,40,85]],['/onboarding',[55,80,85,35]],['/settings',[20,45,95,60]],['/search',[70,60,30,40]]];
+const SD_BANDS=[[0,'Marginal','#7f97b2'],[45,'Slight','#d9a531'],[58,'Enhanced','#e0782f'],[70,'Critical','#c8382e']];
+DM.weights=el=>{const w=[...el.querySelectorAll('input[type=range]')].map(i=>+i.value),t=w.reduce((a,b)=>a+b,0)||1;
+ el.querySelectorAll('.wl output').forEach((o,i)=>o.textContent=Math.round(w[i]/t*100)+'%');
+ const rows=SD_PAGES.map(p=>[p[0],p[1].reduce((a,v,i)=>a+v*w[i],0)/t]).sort((a,b)=>b[1]-a[1]);
+ el.querySelector('.rank').innerHTML=rows.map((r,i)=>{const b=[...SD_BANDS].reverse().find(x=>r[1]>=x[0]);return`<li><span class="n">${i+1}</span><span class="pg">${r[0]}</span><span class="bar"><i style="width:${r[1]}%;background:${b[2]}"></i></span><span class="sc">${Math.round(r[1])}</span><span class="band" style="--c:${b[2]}">${b[1]}</span></li>`}).join('');};
+const weightsHTML=()=>`<div class="demo" data-demo="weights">${demoHead('Fix-first ranking','Move the weights and watch which page rises to the top. Defaults are the shipped weights.')}
+ <div class="wgrid"><div class="wls">${[['Reach',35],['Volume',25],['Persistence',25],['Intensity',15]].map(x=>`<label class="wl"><span>${x[0]}</span><input type="range" min="0" max="60" value="${x[1]}" data-d="${x[1]}"><output></output></label>`).join('')}<button type="button" class="ghost" data-reset>Reset to shipped weights</button></div>
+ <ol class="rank" aria-live="polite"></ol></div><small class="note">Sample pages and signal values.</small></div>`;
+
+/* BenchPrep: candidate status */
+const BP=['Not assessed','Scheduled','Interview complete','Client ready','Not client ready'];
+const BP_NEXT={0:[['Schedule AI interview',1]],1:[['Mark interview complete',2]],2:[['Client ready',3],['Not client ready',4]],3:[],4:[]};
+const BP_NOTE=['Recruiter sees: "Send interview link".','Candidate gets one link. Recruiter sees the date, nothing to chase.','Report is ready. The recruiter decides; the AI never does.','Shared with the client, with the report attached.','Kept out of the client view. The reason stays on file.'];
+DM.pipeline=el=>{const s=+el.dataset.s;
+ el.querySelector('.flow').innerHTML=BP.map((x,i)=>`<span class="${i===s?'cur':''}${(i<s&&!(s===4&&i===3))||(s===3&&i<3)?' done':''}${(s===3&&i===4)||(s===4&&i===3)?' off':''}">${x}</span>${i<2?'<i>→</i>':i===2?'<i>→</i>':i===3?'<i>/</i>':''}`).join('');
+ el.querySelector('.bp-note').textContent=BP_NOTE[s];
+ el.querySelector('.bp-act').innerHTML=(BP_NEXT[s].length?BP_NEXT[s]:[['Start again',0]]).map(a=>`<button type="button" class="${a[1]===4?'ghost':'solid'}" data-go="${a[1]}">${a[0]}</button>`).join('');};
+const pipelineHTML=()=>`<div class="demo" data-demo="pipeline" data-s="0">${demoHead('Candidate in a role','Move a sample candidate through the states I defined.')}
+ <div class="bp-card"><div class="bp-who"><b>Sample candidate</b><span>Senior frontend engineer · 82% match</span></div><div class="flow"></div><p class="bp-note" aria-live="polite"></p><div class="bp-act"></div></div></div>`;
+
+/* Kanz: drift rule */
+const KZ={total:500000,t:{Funds:60,Shares:25,Crypto:15}};
+const rs=n=>'Rs '+Math.round(n).toLocaleString('en-PK');
+DM.drift=el=>{const sh=+el.querySelector('[data-k=s]').value,cr=+el.querySelector('[data-k=c]').value;
+ el.querySelector('[data-o=s]').textContent=(sh>0?'+':'')+sh+'%';el.querySelector('[data-o=c]').textContent=(cr>0?'+':'')+cr+'%';
+ const v={Funds:KZ.total*.6,Shares:KZ.total*.25*(1+sh/100),Crypto:KZ.total*.15*(1+cr/100)},tot=v.Funds+v.Shares+v.Crypto;
+ const pct=Object.fromEntries(Object.entries(v).map(([k,x])=>[k,x/tot*100]));
+ const cols={Funds:'#1f6b4f',Shares:'#a3f000',Crypto:'#e0782f'};
+ el.querySelector('.kz-bars').innerHTML=['now','target'].map(r=>`<div class="kz-row"><span>${r==='now'?'Your mix':'Target'}</span><div class="kz-bar">${Object.keys(v).map(k=>`<i style="width:${r==='now'?pct[k]:KZ.t[k]}%;background:${cols[k]}" title="${k}"></i>`).join('')}</div></div>`).join('')+`<div class="kz-key">${Object.keys(v).map(k=>`<span><i style="background:${cols[k]}"></i>${k} ${pct[k].toFixed(1)}% <em>/ ${KZ.t[k]}%</em></span>`).join('')}</div><div class="kz-tot">Total ${rs(tot)}</div>`;
+ const d=Object.keys(v).map(k=>[k,pct[k]-KZ.t[k]]).sort((a,b)=>Math.abs(b[1])-Math.abs(a[1]))[0];
+ const card=el.querySelector('.kz-card');
+ if(Math.abs(d[1])<=5){card.className='kz-card calm';card.innerHTML=`<b>No action needed.</b><span>Every type is within 5 points of target. Biggest gap: ${d[0]} ${Math.abs(d[1]).toFixed(1)} points.</span>`;return;}
+ const over=d[1]>0,other=Object.keys(v).filter(k=>k!==d[0]).sort((a,b)=>over?(pct[a]-KZ.t[a])-(pct[b]-KZ.t[b]):(pct[b]-KZ.t[b])-(pct[a]-KZ.t[a]))[0];
+ const amt=Math.abs(d[1])/100*tot;
+ card.className='kz-card act';card.innerHTML=`<b>${d[0]} is ${Math.abs(d[1]).toFixed(1)} points ${over?'above':'below'} target. ${Math.abs(d[1]).toFixed(1)} is above 5.0.</b><span>Move ${rs(amt)} ${over?`from ${d[0].toLowerCase()} to ${other.toLowerCase()}`:`from ${other.toLowerCase()} to ${d[0].toLowerCase()}`}. You make the move in your own app; Kanz never touches your money.</span>`;};
+const driftHTML=()=>`<div class="demo" data-demo="drift">${demoHead('The drift rule','A balanced profile with Rs 500,000. Move the market and see when Kanz speaks up.')}
+ <div class="kz-ctl"><label class="wl"><span>Shares move</span><input type="range" data-k="s" min="-60" max="120" step="5" value="0"><output data-o="s"></output></label><label class="wl"><span>Crypto moves</span><input type="range" data-k="c" min="-80" max="200" step="5" value="0"><output data-o="c"></output></label></div>
+ <div class="kz-bars"></div><div class="kz-card" aria-live="polite"></div><small class="note">Sample portfolio. The 5-point rule is the shipped rule.</small></div>`;
+
+Object.assign(VIZ,{contrast:themeHTML,weights:weightsHTML,pipeline:pipelineHTML,drift:driftHTML});
+const initDemos=root=>root.querySelectorAll('.demo').forEach(el=>DM[el.dataset.demo]&&DM[el.dataset.demo](el));
+document.addEventListener('input',e=>{const d=e.target.closest('.demo');if(!d)return;if(d.dataset.demo==='theme'&&e.target.type==='color')d.dataset.c=e.target.value;DM[d.dataset.demo](d);});
+document.addEventListener('click',e=>{const d=e.target.closest('.demo');if(!d)return;const t=e.target.closest('button');if(!t)return;
+ if(t.dataset.v)d.dataset.c=t.dataset.v;else if(t.dataset.fix)d.dataset.c=t.dataset.fix;else if(t.dataset.go!=null)d.dataset.s=t.dataset.go;
+ else if(t.hasAttribute('data-reset'))d.querySelectorAll('input[type=range]').forEach(i=>i.value=i.dataset.d);else return;
+ DM[d.dataset.demo](d);});
 const cs=document.getElementById('cs'), csBody=document.getElementById('csBody'), csCrumb=document.getElementById('csCrumb');
 let cur=-1,lastFocus=null;
 function renderSec(s){
@@ -784,7 +925,7 @@ function openCase(i){
    ${secs.join('')}
    <div class="nextcase"><div><div class="eyebrow" style="margin-bottom:10px">Next case study</div><button type="button" class="big" id="csNextBig" data-cur="Next case study">${next.n} →</button></div><button class="pill" type="button" id="csBack" data-cur="Back to work">All work</button></div></div>`;
   cs.classList.add('open'); cs.setAttribute('aria-hidden','false'); cs.scrollTop=0; document.body.style.overflow='hidden';
-  fitShots(cs);
+  fitShots(cs); initDemos(cs);
   document.getElementById('csNextBig').onclick=()=>openCase((i+1)%CASES.length);
   document.getElementById('csBack').onclick=closeCase;
   try{history.replaceState(null,'','#'+c.id)}catch(e){}
@@ -794,7 +935,7 @@ function closeCase(){cs.classList.remove('open');cs.setAttribute('aria-hidden','
 document.getElementById('csClose').onclick=closeCase;
 document.getElementById('csNext').onclick=()=>openCase((cur+1)%CASES.length);
 document.getElementById('csPrev').onclick=()=>openCase((cur-1+CASES.length)%CASES.length);
-addEventListener('keydown',e=>{if(!cs.classList.contains('open'))return;if(e.key==='Escape')closeCase();if(e.key==='ArrowRight')openCase((cur+1)%CASES.length);if(e.key==='ArrowLeft')openCase((cur-1+CASES.length)%CASES.length);});
+addEventListener('keydown',e=>{if(!cs.classList.contains('open'))return;if(e.key==='Escape')closeCase();if(e.target.closest&&e.target.closest('input,textarea,select'))return;if(e.key==='ArrowRight')openCase((cur+1)%CASES.length);if(e.key==='ArrowLeft')openCase((cur-1+CASES.length)%CASES.length);});
 
 /* ---------- copy email ---------- */
 document.getElementById('copyMail').addEventListener('click',()=>{const out=document.getElementById('copied');
