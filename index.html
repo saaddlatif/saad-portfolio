@@ -59,7 +59,10 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .portrait img{width:100%;height:100%;object-fit:cover;object-position:50% 20%;display:block}
 .tile{position:absolute;left:0;top:0;width:clamp(150px,15vw,240px);border-radius:8px;overflow:hidden;z-index:2;will-change:transform;
   box-shadow:0 30px 60px -24px #000c,0 0 0 1px #ffffff1f;transition:box-shadow .25s}
-.tile:hover{box-shadow:0 30px 60px -24px #000c,0 0 0 2px var(--blush)}
+.tile:hover{box-shadow:0 30px 60px -24px #000c,0 0 0 2px var(--blush);z-index:5;scale:1.06;animation:jiggle .55s cubic-bezier(.36,.07,.19,.97)}
+.tile{transition:box-shadow .25s,scale .25s}
+@keyframes jiggle{0%{rotate:0deg}18%{rotate:-4deg}36%{rotate:3.5deg}54%{rotate:-2.5deg}72%{rotate:1.5deg}88%{rotate:-.5deg}100%{rotate:0deg}}
+@media (prefers-reduced-motion:reduce){.tile:hover{animation:none}}
 .heroFoot{position:absolute;left:0;right:0;bottom:0;padding-block:120px 30px;z-index:4;color:var(--blush);background:linear-gradient(to top,#3a0b08e6,#3a0b0899 45%,transparent)}
 .heroFoot .wrap{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap}
 .heroFoot p{margin:0;max-width:32ch;font-size:clamp(17px,1.6vw,21px);line-height:1.4;font-weight:400}
@@ -250,6 +253,9 @@ footer{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-s
 /* ---------- product screens (1200×750 canvas, scaled to fit) ---------- */
 .shot{position:relative;aspect-ratio:1200/750;overflow:hidden;background:#fff}
 .shotimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top left;display:block}
+.gallery .shot.tall,.cs-hero .shot.tall{overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
+.gallery .shot.tall .shotimg,.cs-hero .shot.tall .shotimg{position:static;height:auto}
+.gallery .shot.tall::after,.cs-hero .shot.tall::after{content:'Scroll the page';position:sticky;display:block;bottom:12px;margin:-40px 12px 12px auto;width:max-content;font:11px var(--f-mono);letter-spacing:.04em;background:#17171acc;color:#fff;padding:5px 9px;border-radius:999px;pointer-events:none}
 .gallery .stage+.stage{margin-top:24px}
 .imgslot{position:absolute;inset:0;display:grid;place-items:center;background:repeating-linear-gradient(45deg,#f1f1ee 0 12px,#e9e9e5 12px 24px);font:12px var(--f-mono);color:var(--muted);padding:16px;text-align:center}.rimg .imgslot{position:static;min-height:220px}
 .proj:last-child:nth-child(even){grid-column:1/-1}
@@ -459,7 +465,7 @@ body.cur-on .mp{display:block}
 .th-check .pass{color:var(--ok)}.th-check .fail{color:var(--warn)}
 .fixb{display:inline-flex;gap:8px;align-items:center;border:1px solid var(--line);background:var(--paper);border-radius:7px;padding:6px 10px;cursor:pointer;font-size:13.5px}
 .fixb i{width:14px;height:14px;border-radius:3px;display:inline-block}
-.wgrid{display:grid;grid-template-columns:200px 1fr;gap:18px;align-items:start}
+.sdw{display:grid;grid-template-columns:200px 1fr;gap:18px;align-items:start}
 .wls{display:grid;gap:10px;justify-items:stretch}
 .wl{display:grid;grid-template-columns:84px 1fr 40px;gap:8px;align-items:center;font-size:13px}
 .wl output{font-family:var(--f-mono);font-size:12px;color:var(--muted);text-align:right}
@@ -493,7 +499,7 @@ body.cur-on .mp{display:block}
 .kz-card.calm{background:var(--paper)}.kz-card.calm b{color:var(--ok)}
 .kz-card.act{background:#fff7ed;border-color:#fed7aa}.kz-card.act b{color:var(--warn)}
 .kz-card span{color:var(--ink)}
-@media (max-width:640px){.wgrid{grid-template-columns:1fr}.th-prev{grid-template-columns:1fr}.tp-side{display:none}.rank li{grid-template-columns:16px 84px 1fr 24px 66px}}
+@media (max-width:640px){.sdw{grid-template-columns:1fr}.th-prev{grid-template-columns:1fr}.tp-side{display:none}.rank li{grid-template-columns:16px 84px 1fr 24px 66px}}
 @media (prefers-reduced-motion:reduce){.rank .bar i,.kz-bar i,.demo .flow span{transition:none}}
 </style>
 
@@ -764,7 +770,7 @@ CASES.find(c=>c.id==='throughput').research=[[IMGS.dlExplore,'User management ex
 CASES.find(c=>c.id==='kanz').img=[IMGS.kzDash,IMGS.kzCopilot,IMGS.kzExplore];
 CASES.find(c=>c.id==='quantus').img=['images/quantus-showcase.png','images/quantus-dashboard.png'];
 CASES.find(c=>c.id==='chakor').tc=['c','Live website · thechakor.com','The Chakor','Designed and shipped in six weeks'];
-CASES.find(c=>c.id==='chakor').img=['images/chakor-home.png','images/chakor-company.png','images/chakor-product-templates.png'];
+CASES.find(c=>c.id==='chakor').img=['images/chakor-home.jpg','images/chakor-company.jpg','images/chakor-product-templates.jpg'];
 const TCV={outlook:'s',shortlist:'b',throughput:'d',kanz:'k',quantus:'q',chakor:'c'};
 window.imgMiss=function(img){
   const item=img.closest('.gallery .stage,.rfig');
@@ -774,12 +780,12 @@ window.imgMiss=function(img){
   const st=fr.parentElement;if(st)st.classList.add('type');
   const t=c.tc||[TCV[c.id]||'d',c.y,c.n,c.hook];fr.outerHTML=`<div class="tcover ${t[0]}"><small>${t[1]}</small><b>${t[2]}</b><span>${t[3]}</span></div>`;
 };
-const imgFrame=(src)=>`<div class="frame"><div class="chrome"><i></i><i></i><i></i></div><div class="shot"><img class="shotimg" src="${src}" alt="" loading="lazy" onerror="imgMiss(this)"></div></div>`;
+const imgFrame=(src)=>`<div class="frame"><div class="chrome"><i></i><i></i><i></i></div><div class="shot"><img class="shotimg" src="${src}" alt="" loading="lazy" onload="if(this.naturalHeight>this.naturalWidth*1.3)this.parentElement.classList.add('tall')" onerror="imgMiss(this)"></div></div>`;
 const visual=(c)=>c.img?imgFrame(c.img[0]):c.scr?`<div class="frame"><div class="chrome"><i></i><i></i><i></i></div>${shotHTML(c.scr[0])}</div>`:`<div class="tcover ${c.tc[0]}"><small>${c.tc[1]}</small><b>${c.tc[2]}</b><span>${c.tc[3]}</span></div>`;
 
 /* ---------- hero ---------- */
 const nav=document.getElementById('nav'), pin=document.getElementById('pin'), hero=document.querySelector('.hero'), cue=document.getElementById('cue'), mate=document.getElementById('mate');
-const HT=[[IMGS.sdMain,0],[IMGS.bpRole,1],[IMGS.dlConn,2],[IMGS.bpReport,1],[IMGS.dlAppear,2],[IMGS.kzDash,3]];
+const HT=[[IMGS.sdMain,0],[IMGS.bpRole,1],[IMGS.dlConn,2],[IMGS.kzDash,3],['images/quantus-showcase.png',4],['images/chakor-home.jpg',5]];
 const start=[[-8,14,-12],[90,8,10],[-10,50,7],[94,46,-8],[-16,92,-5],[96,90,12]];
 const endWide=[[6,24],[79,24],[12,45],[73,45],[4,64],[81,64]];
 const endNarrow=[[-4,30],[74,30],[-4,45],[74,45],[-50,62],[120,62]];
@@ -857,7 +863,7 @@ DM.weights=el=>{const w=[...el.querySelectorAll('input[type=range]')].map(i=>+i.
  const rows=SD_PAGES.map(p=>[p[0],p[1].reduce((a,v,i)=>a+v*w[i],0)/t]).sort((a,b)=>b[1]-a[1]);
  el.querySelector('.rank').innerHTML=rows.map((r,i)=>{const b=[...SD_BANDS].reverse().find(x=>r[1]>=x[0]);return`<li><span class="n">${i+1}</span><span class="pg">${r[0]}</span><span class="bar"><i style="width:${r[1]}%;background:${b[2]}"></i></span><span class="sc">${Math.round(r[1])}</span><span class="band" style="--c:${b[2]}">${b[1]}</span></li>`}).join('');};
 const weightsHTML=()=>`<div class="demo" data-demo="weights">${demoHead('Fix-first ranking','Move the weights and watch which page rises to the top. Defaults are the shipped weights.')}
- <div class="wgrid"><div class="wls">${[['Reach',35],['Volume',25],['Persistence',25],['Intensity',15]].map(x=>`<label class="wl"><span>${x[0]}</span><input type="range" min="0" max="60" value="${x[1]}" data-d="${x[1]}"><output></output></label>`).join('')}<button type="button" class="ghost" data-reset>Reset to shipped weights</button></div>
+ <div class="sdw"><div class="wls">${[['Reach',35],['Volume',25],['Persistence',25],['Intensity',15]].map(x=>`<label class="wl"><span>${x[0]}</span><input type="range" min="0" max="60" value="${x[1]}" data-d="${x[1]}"><output></output></label>`).join('')}<button type="button" class="ghost" data-reset>Reset to shipped weights</button></div>
  <ol class="rank" aria-live="polite"></ol></div><small class="note">Sample pages and signal values.</small></div>`;
 
 /* BenchPrep: candidate status */
