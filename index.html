@@ -508,6 +508,43 @@ body.cur-on .mp{display:block}
 .kz-card span{color:var(--ink)}
 @media (max-width:640px){.sdw{grid-template-columns:1fr}.th-prev{grid-template-columns:1fr}.tp-side{display:none}.rank li{grid-template-columns:16px 84px 1fr 24px 66px}}
 @media (prefers-reduced-motion:reduce){.rank .bar i,.kz-bar i,.demo .flow span{transition:none}}
+
+/* ---------- work: folder dividers ---------- */
+.folders{display:flex;height:clamp(460px,72vh,640px);margin-top:8px;padding-right:44px}
+.fold{--fb:#8b8c7a;--ft:#1d1d1b;position:relative;flex:1 1 0;min-width:0;margin-left:-10px;border:0;padding:0;text-align:left;cursor:pointer;color:var(--ft);
+ background:var(--fb);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+ border-radius:6px;box-shadow:6px 0 14px -6px #0006,inset -1px 0 0 #ffffff14;transition:flex-grow .55s cubic-bezier(.2,.8,.2,1);overflow:visible}
+.fold:first-child{margin-left:0}
+.fold.on{flex-grow:5}
+.ftab{position:absolute;left:100%;top:calc(16px + var(--k)*34px);width:34px;padding:14px 0;background:inherit;border-radius:0 9px 9px 0;writing-mode:vertical-rl;display:flex;gap:10px;align-items:center;
+ font:500 10.5px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;box-shadow:4px 2px 8px -4px #0005;white-space:nowrap}
+.fspine{position:absolute;left:30px;top:300px;bottom:0;width:56px;display:flex;flex-direction:column;justify-content:space-between;align-items:center;padding:22px 0 18px;writing-mode:vertical-rl;transform:rotate(180deg)}
+.fspine b{font-family:var(--f-display);font-weight:600;font-size:clamp(24px,2.2vw,34px);letter-spacing:-.03em;line-height:1;white-space:nowrap}
+.fspine small{font:11px var(--f-mono);letter-spacing:.06em;opacity:.7}
+.fbody{position:absolute;left:100px;right:22px;top:22px;bottom:22px;display:grid;grid-template-rows:minmax(0,1fr) auto;gap:18px;opacity:0;visibility:hidden;transition:opacity .25s,visibility 0s .25s}
+.fold.on .fbody{opacity:1;visibility:visible;transition:opacity .35s .2s,visibility 0s}
+.fshot{min-height:0;display:block}
+.fshot .stage{display:block;height:100%;aspect-ratio:auto;border-radius:10px;background:#00000014;padding:4% 5% 0}
+.fshot .stage.type{padding:0}
+.fmeta{display:grid;gap:8px;max-width:62ch}
+.fmeta .eyebrow{color:inherit;opacity:.7}
+.fk{font-size:16px;line-height:1.45}
+.fmeta .hook{justify-self:start;font-size:12.5px;font-weight:600;border:1px solid currentColor;border-radius:999px;padding:3px 10px;opacity:.9}
+.fgo{font-family:var(--f-display);font-weight:600;font-size:15px}
+.fold:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+.fhint{margin:14px 0 0;font:11.5px var(--f-mono);color:var(--muted);letter-spacing:.04em}
+@media (max-width:760px){
+ .folders{flex-direction:column;height:auto;padding-right:0;padding-top:30px}
+ .fold{flex:none;margin-left:0;margin-top:-12px;height:92px;border-radius:8px 8px 0 0;transition:height .45s cubic-bezier(.2,.8,.2,1);box-shadow:0 -6px 14px -8px #0006}
+ .fold:first-child{margin-top:0}
+ .fold.on{height:min(78vh,560px)}
+ .ftab{left:auto;right:calc(14px + var(--k)*12%);top:auto;bottom:100%;width:auto;padding:6px 12px;writing-mode:horizontal-tb;border-radius:9px 9px 0 0;box-shadow:none;max-width:60%}
+ .fspine{writing-mode:horizontal-tb;transform:none;width:auto;left:0;top:0;right:18px;bottom:auto;height:80px;flex-direction:row;padding:0 0 0 18px;align-items:center}
+ .fspine b{font-size:26px}
+ .fbody{left:16px;right:16px;top:84px;bottom:16px}
+ .fk{font-size:14.5px}
+}
+@media (prefers-reduced-motion:reduce){.fold,.fbody{transition:none}}
 </style>
 
 <nav class="nav" id="nav">
@@ -559,7 +596,8 @@ body.cur-on .mp{display:block}
 
   <section class="wrap work" id="work">
     <div class="secHead"><div><div class="eyebrow">Selected work</div><h3>Six projects, told through decisions</h3></div><p>Real products, real screens. Each one is told through the decisions that shaped it.</p></div>
-    <div class="wgrid" id="wgrid"></div>
+    <div class="folders" id="wgrid" role="list"></div>
+    <p class="fhint" id="fhint">Hover a folder to pull it out. Click to open the case file.</p>
     <div class="archive"><div class="eyebrow">Archive</div><div class="alist" id="alist"></div></div>
   </section>
 
@@ -826,8 +864,19 @@ io.observe(say); setTimeout(()=>words.forEach(w=>w.classList.add('on')),5000);
 const idx=id=>CASES.findIndex(c=>c.id===id);
 document.getElementById('plist').innerHTML=PROOF.map(p=>`<button type="button" class="prow" data-c="${p.c}" data-cur="See the proof"><h4>${p.h}</h4><p>${p.p}</p><span class="ev"><small>Proof</small><u>${p.ev}</u></span></button>`).join('');
 document.getElementById('plist').addEventListener('click',e=>{const b=e.target.closest('.prow');if(b)openCase(idx(b.dataset.c));});
-document.getElementById('wgrid').innerHTML=CASES.map((c,i)=>`<button type="button" class="proj${i===0?' feature':''}" data-i="${i}" data-cur="Read case study"><div class="stage${(c.scr||c.img)?'':' type'}">${visual(c)}</div><div class="pmeta"><h4>${c.n}</h4><span class="yr">${c.y}</span><p>${c.k}</p><div class="tags"><span class="hook">${c.hook}</span><span>Case study</span></div></div></button>`).join('');
-document.getElementById('wgrid').addEventListener('click',e=>{const b=e.target.closest('.proj');if(b)openCase(+b.dataset.i);});
+const FPAL=[['#8b8c7a','#1d1d1b'],['#e8e1cf','#1d1d1b'],['#8f98a6','#14161a'],['#a98760','#1d140b'],['#1f1f1d','#ece6d6'],['#4a4d3c','#ece6d6']];
+const wg=document.getElementById('wgrid');
+wg.innerHTML=CASES.map((c,i)=>{const f=FPAL[i%FPAL.length];return `<button type="button" role="listitem" class="fold${i===0?' on':''}" data-i="${i}" data-cur="Open case file" style="--fb:${f[0]};--ft:${f[1]};--k:${i};z-index:${20-i}" aria-label="${c.n}, ${c.y}. Open case study">
+ <span class="ftab" aria-hidden="true">CASE_0${i+1}</span>
+ <span class="fspine"><b>${c.n}</b><small>${c.y}</small></span>
+ <span class="fbody"><span class="fshot"><span class="stage${(c.scr||c.img)?'':' type'}">${visual(c)}</span></span>
+  <span class="fmeta"><span class="eyebrow">File ${String(i+1).padStart(2,'0')} · ${c.y}</span><span class="fk">${c.k}</span><span class="hook">${c.hook}</span><span class="fgo">Open the case file →</span></span></span></button>`}).join('');
+const folds=[...wg.querySelectorAll('.fold')];
+const setOn=b=>folds.forEach(x=>x.classList.toggle('on',x===b));
+const coarse=matchMedia('(hover:none)');if(coarse.matches)document.getElementById('fhint').textContent='Tap a folder to pull it out. Tap again to open the case file.';
+folds.forEach(b=>{b.addEventListener('mouseenter',()=>{if(!coarse.matches)setOn(b)});b.addEventListener('focus',()=>setOn(b));
+ b.addEventListener('pointerdown',()=>{b._was=b.classList.contains('on')});
+ b.addEventListener('click',()=>{const was=b._was??b.classList.contains('on');b._was=undefined;if(!was){setOn(b);return;}openCase(+b.dataset.i);});});
 document.getElementById('alist').innerHTML=ARCHIVE.map(a=>`<div><span>${a[0]}</span><span>${a[1]}</span></div>`).join('');
 fitShots();
 
