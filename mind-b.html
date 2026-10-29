@@ -554,8 +554,8 @@ body.cur-on .mp{display:block}
 .bp-bar.neg i{background:linear-gradient(90deg,#6d3fd6,#b45309)}
 .demo[data-demo=pipeline] .flow .done{background:#ecfdf3;color:#166534;border-color:#bbf7d0}
 .demo[data-demo=pipeline] .flow .done em{font-style:normal;margin-right:5px}
-.demo[data-demo=pipeline] .flow .cur{background:#6d3fd6;color:#fff;border-color:#6d3fd6;box-shadow:0 0 0 4px #6d3fd61f}
-.demo[data-demo=pipeline] .flow .cur.no{background:#b45309;border-color:#b45309;box-shadow:0 0 0 4px #b453091f}
+.demo[data-demo=pipeline] .flow .cur{background:var(--ink);color:#fff;border-color:var(--ink);box-shadow:0 0 0 4px #17171a14}
+.demo[data-demo=pipeline] .flow .cur.no{background:var(--ink);border-color:var(--ink);box-shadow:0 0 0 4px #17171a14}
 .bp-note{background:var(--paper);border-radius:10px;padding:10px 12px;color:var(--ink)!important;font-size:14px}
 .bp-note b{color:#6d3fd6;font-weight:600}
 .bp-go,.bp-neg{border-radius:999px;padding:10px 18px;font-size:14.5px;font-weight:600;cursor:pointer;transition:transform .15s,box-shadow .2s,background .2s}
@@ -568,6 +568,19 @@ body.cur-on .mp{display:block}
 @keyframes nudge{0%,55%,100%{transform:translateY(0)}65%{transform:translateY(-5px)}74%{transform:translateY(0)}81%{transform:translateY(-2px)}88%{transform:translateY(0)}}
 .bp-go.nudge:hover{animation-play-state:paused}
 @media (prefers-reduced-motion:reduce){.bp-go.nudge{animation:none}.bp-bar i{transition:none}}
+
+/* hero tiles as folders */
+.pin .tile{overflow:visible;background:none;border-radius:0;box-shadow:none;padding:0;filter:drop-shadow(0 26px 30px #0007)}
+.pin .tile:hover{box-shadow:none;filter:drop-shadow(0 30px 34px #000a)}
+.pin .tile .fback,.pin .tile .ffront,.pin .tile .ttab{background-color:var(--fb);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");color:var(--ft)}
+.pin .tile .fback{position:absolute;inset:0;border-radius:2px 8px 8px 8px}
+.pin .tile .ttab{position:absolute;left:0;bottom:100%;padding:4px 12px 3px;border-radius:7px 7px 0 0;font:600 9.5px var(--f-mono);letter-spacing:.08em;white-space:nowrap}
+.pin .tile .tpaper{position:relative;display:block;margin:0 7% 16%;transform:translateY(-6%);transition:transform .35s cubic-bezier(.2,.8,.2,1);border-radius:4px;overflow:hidden;box-shadow:0 2px 8px #0003}
+.pin .tile:hover .tpaper{transform:translateY(-22%)}
+.pin .tile .ffront{position:absolute;left:0;right:0;bottom:0;height:46%;border-radius:4px 4px 8px 8px;box-shadow:0 -6px 12px -8px #0006,inset 0 1px 0 #ffffff26;display:flex;justify-content:space-between;align-items:flex-end;padding:0 10px 8px;gap:8px}
+.pin .tile .ffront b{font-family:var(--f-display);font-weight:600;font-size:clamp(12px,1.05vw,16px);letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pin .tile .ffront small{font:9.5px var(--f-mono);opacity:.7;white-space:nowrap}
+@media (prefers-reduced-motion:reduce){.pin .tile .tpaper{transition:none}}
 .fold.lit{animation:lit 1.4s ease}@keyframes lit{0%,100%{box-shadow:6px 0 14px -6px #0006}30%{box-shadow:0 0 0 3px var(--coral),0 0 40px 6px #ff5a3c66}}
 
 .gate{position:fixed;inset:0;z-index:200;background:#120403;color:var(--blush);overflow:hidden;cursor:none;transition:opacity .9s ease,visibility 0s .9s;touch-action:none}
@@ -901,7 +914,9 @@ const HT=[[IMGS.sdMain,0],[IMGS.bpRole,1],[IMGS.dlConn,2],[IMGS.kzDash,3],['imag
 const start=[[-8,14,-12],[90,8,10],[-10,50,7],[94,46,-8],[-16,92,-5],[96,90,12]];
 const endWide=[[6,24],[79,24],[12,45],[73,45],[4,64],[81,64]];
 const endNarrow=[[-4,30],[74,30],[-4,45],[74,45],[-50,62],[120,62]];
-const tiles=HT.map((t,i)=>{const d=document.createElement('div');d.className='tile';d.dataset.cur='Read case study';d.innerHTML=`<div class="shot"><img class="shotimg" src="${t[0]}" alt="" onerror="this.style.display='none'"></div>`;d.addEventListener('click',()=>openCase(t[1]));pin.appendChild(d);return d;});
+const HPAL=[['#8b8c7a','#1d1d1b'],['#e8e1cf','#1d1d1b'],['#8f98a6','#14161a'],['#a98760','#1d140b'],['#1f1f1d','#ece6d6'],['#4a4d3c','#ece6d6']];
+const tiles=HT.map((t,i)=>{const d=document.createElement('div');d.className='tile';d.dataset.cur='Open case file';const f=HPAL[t[1]%HPAL.length],cn=CASES[t[1]].n.replace('The ','');d.style.setProperty('--fb',f[0]);d.style.setProperty('--ft',f[1]);
+ d.innerHTML=`<span class="fback"></span><span class="ttab">CASE_0${t[1]+1}</span><div class="tpaper"><div class="shot"><img class="shotimg" src="${t[0]}" alt="" onerror="this.style.display='none'"></div></div><span class="ffront"><b>${cn}</b><small>${CASES[t[1]].y}</small></span>`;d.addEventListener('click',()=>openCase(t[1]));pin.appendChild(d);return d;});
 const ease=t=>1-Math.pow(1-t,3);
 function place(p){
   const W=pin.clientWidth,H=pin.clientHeight,end=W<640?endNarrow:endWide;
@@ -1000,7 +1015,7 @@ DM.pipeline=el=>{const s=+el.dataset.s;
  el.querySelector('.bp-bar').classList.toggle('neg',s===4);
  const n=BP_NOTE[s];el.querySelector('.bp-note').innerHTML=`<b>${n[0]}</b> ${n[1]}`;
  const nudge=!el.dataset.touched?' nudge':'';
- el.querySelector('.bp-act').innerHTML=(BP_NEXT[s].length?BP_NEXT[s]:[['Start again',0]]).map(a=>`<button type="button" class="${a[1]===4?'bp-neg':a[1]===0?'ghost':'bp-go'+nudge}" data-go="${a[1]}">${a[0]}${a[1]&&a[1]!==4?' <span aria-hidden="true">→</span>':''}</button>`).join('');};
+ el.querySelector('.bp-act').innerHTML=(BP_NEXT[s].length?BP_NEXT[s]:[['Start again',0]]).map(a=>`<button type="button" class="${a[1]===4?'bp-neg':a[1]===0?'bp-go':'bp-go'+nudge}" data-go="${a[1]}">${a[1]===0?'<span aria-hidden="true">↺</span> ':''}${a[0]}${a[1]&&a[1]!==4?' <span aria-hidden="true">→</span>':''}</button>`).join('');};
 const pipelineHTML=()=>`<div class="demo" data-demo="pipeline" data-s="0">${demoHead('Candidate in a role','Move a sample candidate through the states I defined.')}
  <div class="bp-card"><div class="bp-who"><span class="bp-av" aria-hidden="true">SC</span><span><b>Sample candidate</b><span>Senior frontend engineer</span></span><span class="bp-match"><b>82%</b><small>AI match</small></span></div>
  <div class="bp-bar" aria-hidden="true"><i></i></div><div class="flow"></div><p class="bp-note" aria-live="polite"></p><div class="bp-act"></div></div></div>`;
