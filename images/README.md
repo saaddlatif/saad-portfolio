@@ -2,10 +2,10 @@
 
 Drop each screenshot here as a .png with exactly this name. Missing ones are hidden on the site, so you can add them in any order.
 
-- `signal-desk-overview.png`
-- `signal-desk-outlook.png`
-- `signal-desk-daily-trace.png`
-- `signal-desk-discussion.png`
+- `signaldesk-main.png`
+- `signaldesk-outlook.png`
+- `signaldesk-home.png`
+- `signaldesk-agent.png`
 - `signal-desk-light.png`
 - `signal-desk-pipeline.png`
 - `benchprep-interviews-dashboard.png`
@@ -19,10 +19,10 @@ Drop each screenshot here as a .png with exactly this name. Missing ones are hid
 - `devlake-user-mgmt-explorations.png`
 - `devlake-ai-cost-chart.png`
 - `kanz-dashboard.png`
-- `kanz-copilot.png`
-- `kanz-explorer.png`
+- `kanz-assets.png`
+- `kanz-psx-account.png`
 - `quantus-showcase.png`
 - `quantus-dashboard.png`
 - `chakor-home.png`
-- `chakor-work.png`
-- `chakor-services.png`
+- `chakor-company.png`
+- `chakor-product-templates.png`

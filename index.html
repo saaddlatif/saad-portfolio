@@ -583,7 +583,7 @@ throughputB(){
 };
 function fitShots(root){(root||document).querySelectorAll('.shot').forEach(s=>{const u=s.firstElementChild;if(!u||u.tagName==='IMG')return;const f=()=>{u.style.transform=`scale(${s.clientWidth/1200})`;};f();if(!s._ro){s._ro=new ResizeObserver(f);s._ro.observe(s);}});}
 function shotHTML(key,cls){return `<div class="shot ${cls||''}">${SCREENS[key]()}</div>`;}
-const IMGS={sdMain:"images/signal-desk-overview.png",sdOutlook:"images/signal-desk-outlook.png",sdTrace:"images/signal-desk-daily-trace.png",sdDisc:"images/signal-desk-discussion.png",sdLight:"images/signal-desk-light.png",sdPipe:"images/signal-desk-pipeline.png",bpRole:"images/benchprep-interviews-dashboard.png",bpReport:"images/benchprep-proctoring-report.png",bpDone:"images/benchprep-candidate-dashboard.png",bpNotFound:"images/benchprep-learning-hub.png",bpFlow:"images/benchprep-figjam-flow.png",dlConn:"images/devlake-connections.png",dlAppear:"images/devlake-general-settings.png",dlOverview:"images/devlake-projects.png",dlExplore:"images/devlake-user-mgmt-explorations.png",dlChart:"images/devlake-ai-cost-chart.png",kzDash:"images/kanz-dashboard.png",kzCopilot:"images/kanz-copilot.png",kzExplore:"images/kanz-explorer.png"};
+const IMGS={sdMain:"images/signaldesk-main.png",sdOutlook:"images/signaldesk-outlook.png",sdTrace:"images/signaldesk-home.png",sdDisc:"images/signaldesk-agent.png",sdLight:"images/signal-desk-light.png",sdPipe:"images/signal-desk-pipeline.png",bpRole:"images/benchprep-interviews-dashboard.png",bpReport:"images/benchprep-proctoring-report.png",bpDone:"images/benchprep-candidate-dashboard.png",bpNotFound:"images/benchprep-learning-hub.png",bpFlow:"images/benchprep-figjam-flow.png",dlConn:"images/devlake-connections.png",dlAppear:"images/devlake-general-settings.png",dlOverview:"images/devlake-projects.png",dlExplore:"images/devlake-user-mgmt-explorations.png",dlChart:"images/devlake-ai-cost-chart.png",kzDash:"images/kanz-dashboard.png",kzCopilot:"images/kanz-assets.png",kzExplore:"images/kanz-psx-account.png"};
 
 const PROOF=[
   {h:'I build what I design',p:'Software engineer first. When a mockup can\'t answer the question, I ship the working thing.',ev:'Signal Desk: designed, built and deployed solo',c:'outlook'},
@@ -693,7 +693,7 @@ CASES.find(c=>c.id==='throughput').research=[[IMGS.dlExplore,'User management ex
 CASES.find(c=>c.id==='kanz').img=[IMGS.kzDash,IMGS.kzCopilot,IMGS.kzExplore];
 CASES.find(c=>c.id==='quantus').img=['images/quantus-showcase.png','images/quantus-dashboard.png'];
 CASES.find(c=>c.id==='chakor').tc=['c','Live website · thechakor.com','The Chakor','Designed and shipped in six weeks'];
-CASES.find(c=>c.id==='chakor').img=['images/chakor-home.png','images/chakor-work.png','images/chakor-services.png'];
+CASES.find(c=>c.id==='chakor').img=['images/chakor-home.png','images/chakor-company.png','images/chakor-product-templates.png'];
 const TCV={outlook:'s',shortlist:'b',throughput:'d',kanz:'k',quantus:'q',chakor:'c'};
 window.imgMiss=function(img){
   const item=img.closest('.gallery .stage,.rfig');
