@@ -213,6 +213,11 @@ footer{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-s
 .gallery .stage{aspect-ratio:16/10;padding:5% 7% 0}
 .gallery .stage:has(.shotimg){aspect-ratio:auto;padding:5% 7%}
 .outcomes{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+.oc.link{text-decoration:none;color:inherit;transition:border-color .2s,transform .2s,box-shadow .2s}
+.oc.link b i{font-style:normal;font-size:.6em;vertical-align:top;color:var(--accent);display:inline-block;transition:transform .2s}
+.oc.link span{text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--line)}
+.oc.link:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 12px 30px -18px #0005}
+.oc.link:hover b i{transform:translate(3px,-3px)}
 .oc{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px}
 .oc b{display:block;font-family:var(--f-display);font-weight:500;font-size:38px;letter-spacing:-.04em;line-height:1.05}
 .oc span{display:block;font-size:14px;color:var(--muted);margin-top:6px}
@@ -757,7 +762,7 @@ const CASES=[
      {h:'Distinctive, not decorative',p:'Original, culturally grounded visuals that break from template studio sites.'},
      {h:'A brand you can recognise without the logo',p:'Colour, type and storytelling working together as one identity.'}
    ]},
-   {l:'Outcome',out:[['Live','thechakor.com'],['gap','Add: enquiries, time on site, or the client\'s reaction']]},
+   {l:'Outcome',out:[['Live','thechakor.com','https://thechakor.com'],['gap','Add: enquiries, time on site, or the client\'s reaction']]},
    {l:'Note',p:['This case is the thinnest right now. Your current site only describes it in general terms. Two or three real decisions and one result would make it as strong as the others.']}
   ]}
 ];
@@ -914,7 +919,7 @@ function renderSec(s){
   if(s.quote) h+=`<blockquote class="quote">${s.quote}</blockquote>`;
   if(s.list) h+=`<ul class="plain">${s.list.map(t=>`<li>${t}</li>`).join('')}</ul>`;
   if(s.dec) h+=`<div class="dec">${s.dec.map((d,i)=>`<article class="decision"><span class="dn">Decision ${i+1}</span><h4>${d.h}</h4><p>${d.p}</p>${d.why?`<p class="why">${d.why}</p>`:''}${d.viz?`<div class="viz">${VIZ[d.viz]()}</div>`:''}</article>`).join('')}</div>`;
-  if(s.out) h+=`<div class="outcomes">${s.out.map(o=>o[0]==='gap'?`<div class="oc gap"><b>Missing number</b><span>${o[1]}</span></div>`:`<div class="oc"><b>${o[0]}</b><span>${o[1]}</span></div>`).join('')}</div>`;
+  if(s.out) h+=`<div class="outcomes">${s.out.filter(o=>o[0]!=='gap').map(o=>o[2]?`<a class="oc link" href="${o[2]}" target="_blank" rel="noopener" data-cur="Open ${o[1]}"><b>${o[0]} <i aria-hidden="true">↗</i></b><span>${o[1]}</span></a>`:`<div class="oc"><b>${o[0]}</b><span>${o[1]}</span></div>`).join('')}</div>`;
   return h+`</div></section>`;
 }
 function openCase(i){
