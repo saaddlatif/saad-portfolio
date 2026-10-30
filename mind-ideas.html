@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Saad Rana · Mind hero ideas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400;500;600;700&family=Funnel+Sans:wght@300;400;500;600&family=Geist+Mono:wght@400;500&family=Caveat:wght@500;700&display=swap">
+<style>
+:root{--vd:#4a0e0a;--v:#7a2214;--blush:#f6dcd3;--paper:#f5f5f3;--ink:#17171a;--muted:#64666d;--coral:#ff5a3c;--purple:#6d3fd6;
+--fd:"Funnel Display",system-ui,sans-serif;--fb:"Funnel Sans",system-ui,sans-serif;--fm:"Geist Mono",ui-monospace,monospace;--fh:"Caveat",cursive}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#120403;color:var(--blush);font-family:var(--fb);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--coral);outline-offset:3px;border-radius:4px}
+.picker{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;gap:6px;align-items:center;padding:12px 16px;background:#120403d9;backdrop-filter:blur(10px);border-bottom:1px solid #f6dcd31f;overflow-x:auto;scrollbar-width:none}
+.picker b{font-family:var(--fd);font-weight:600;font-size:15px;margin-right:10px;white-space:nowrap}
+.picker a{text-decoration:none;font-size:13px;border:1px solid #f6dcd333;border-radius:999px;padding:6px 12px;white-space:nowrap;opacity:.8}
+.picker a:hover,.picker a.on{opacity:1;background:var(--blush);color:var(--vd)}
+.idea{position:relative;min-height:100vh;min-height:100svh;overflow:hidden;padding-top:56px}
+.tag{position:absolute;z-index:20;left:16px;bottom:16px;max-width:min(440px,calc(100% - 32px));background:#fffffff2;color:var(--ink);border-radius:12px;padding:12px 14px;font-size:13.5px;line-height:1.45;box-shadow:0 10px 30px -14px #000a}
+.tag b{display:block;font-family:var(--fd);font-size:16px;margin-bottom:2px}
+.tag small{display:block;margin-top:6px;font-family:var(--fm);font-size:11px;color:var(--muted)}
+.name{font-family:var(--fd);font-weight:600;letter-spacing:-.045em;line-height:.85;margin:0}
+.eyebrow{font-family:var(--fm);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;opacity:.75}
+
+/* ---------- C: inner monologue ---------- */
+#c{background:radial-gradient(120% 90% at 20% 30%,#7a2214 0,#4a0e0a 45%,#1f0605 100%);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);align-items:end}
+#c .pc{position:relative;align-self:end;height:calc(100vh - 56px);display:flex;align-items:flex-end;justify-content:center}
+#c .pc img{height:92%;max-width:100%;object-fit:cover;object-position:50% 20%;-webkit-mask-image:linear-gradient(to top,transparent 0,#000 18%),radial-gradient(ellipse 70% 85% at 50% 60%,#000 55%,transparent 80%);-webkit-mask-composite:source-in;mask-image:linear-gradient(to top,transparent 0,#000 18%),radial-gradient(ellipse 70% 85% at 50% 60%,#000 55%,transparent 80%);mask-composite:intersect}
+#c .bubble{position:absolute;top:16%;right:4%;width:28px;height:28px;border-radius:50%;background:#f6dcd3;opacity:.85}
+#c .bubble::before{content:"";position:absolute;right:30px;top:32px;width:14px;height:14px;border-radius:50%;background:#f6dcd3;opacity:.7}
+#c .mono{align-self:center;padding:40px clamp(20px,5vw,72px) 120px 0;display:grid;gap:18px}
+#c .mono .name{font-size:clamp(44px,6vw,96px)}
+#c .log{font-family:var(--fm);font-size:clamp(14px,1.25vw,17px);line-height:1.7;min-height:11em;background:#0000004d;border:1px solid #f6dcd326;border-radius:14px;padding:18px 20px;color:#f6dcd3e6}
+#c .log p{margin:0 0 6px}
+#c .log .me{color:#ffb4a3}
+#c .log .q{color:#f6dcd380}
+#c .log a{color:var(--blush);text-underline-offset:3px}
+#c .caret{display:inline-block;width:.6em;height:1.1em;vertical-align:-2px;background:var(--blush);animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+#c .asks{display:flex;flex-wrap:wrap;gap:8px}
+#c .asks button{border:1px solid #f6dcd355;background:transparent;border-radius:999px;padding:9px 14px;font-size:14px;cursor:pointer}
+#c .asks button:hover{background:var(--blush);color:var(--vd)}
+#c .asks button[disabled]{opacity:.35;cursor:default}
+
+/* ---------- D: mind canvas ---------- */
+#d{background:#efece4;color:var(--ink);background-image:radial-gradient(#17171a26 1px,transparent 1.2px);background-size:22px 22px;touch-action:none}
+#d .hd{position:absolute;left:50%;top:84px;transform:translateX(-50%);text-align:center;z-index:2;pointer-events:none;width:min(680px,90vw)}
+#d .hd .name{font-size:clamp(40px,6vw,88px)}
+#d .hd p{margin:10px 0 0;color:var(--muted);font-size:15px}
+.it{position:absolute;z-index:3;cursor:grab;user-select:none;-webkit-user-select:none;touch-action:none;transition:box-shadow .2s,transform .2s}
+.it.drag{cursor:grabbing;z-index:50;box-shadow:0 30px 50px -20px #0007!important}
+.sticky{width:170px;padding:16px 14px;background:#ffe27a;font-family:var(--fh);font-size:24px;line-height:1.05;box-shadow:0 10px 18px -10px #0005}
+.sticky.p{background:#ffc9d6}.sticky.b{background:#bfe3ff}.sticky.g{background:#c9f2c7}
+.shotc{width:230px;background:#fff;border-radius:10px;padding:8px;box-shadow:0 14px 28px -14px #0006}
+.shotc .im{aspect-ratio:16/10;border-radius:6px;background-size:cover;background-position:top left;background-color:#ddd}
+.shotc span{display:flex;justify-content:space-between;font-size:12.5px;padding:7px 2px 0;font-weight:600}
+.shotc span em{font-style:normal;font-weight:400;color:var(--muted)}
+.polaroid{width:150px;background:#fff;padding:8px 8px 30px;box-shadow:0 14px 28px -14px #0007}
+.polaroid img{width:100%;aspect-ratio:1;object-fit:cover;object-position:50% 18%;display:block;pointer-events:none}
+.polaroid i{position:absolute;bottom:6px;left:0;right:0;text-align:center;font-family:var(--fh);font-size:20px;font-style:normal}
+.scribble{font-family:var(--fh);font-size:30px;color:var(--v);width:230px;line-height:1}
+.wire{width:200px;background:#fff;border:1.5px dashed #17171a55;border-radius:8px;padding:10px;display:grid;gap:6px}
+.wire i{display:block;height:8px;border-radius:3px;background:#17171a1f}
+.wire i:nth-child(1){width:40%;height:10px;background:#17171a40}.wire i:nth-child(3){width:70%}
+.wire b{font-family:var(--fh);font-size:20px;font-weight:500}
+
+/* ---------- E: two minds ---------- */
+#e{background:#0b1220;--x:50%;user-select:none;-webkit-user-select:none}
+#e .lay{position:absolute;inset:56px 0 0 0}
+#e .eng{background:#0b1a33;background-image:linear-gradient(#7fb4ff14 1px,transparent 1px),linear-gradient(90deg,#7fb4ff14 1px,transparent 1px);background-size:28px 28px;color:#cfe2ff}
+#e .des{background:radial-gradient(120% 90% at 70% 30%,#7a2214 0,#4a0e0a 50%,#1f0605 100%);clip-path:inset(0 0 0 var(--x))}
+#e .ph{position:absolute;left:50%;bottom:0;transform:translateX(-50%);height:88%;aspect-ratio:3/4}
+#e .ph img{width:100%;height:100%;object-fit:cover;object-position:50% 20%;-webkit-mask-image:linear-gradient(to top,transparent 0,#000 14%);mask-image:linear-gradient(to top,transparent 0,#000 14%)}
+#e .eng .ph img{filter:grayscale(1) contrast(1.15) brightness(.9) sepia(.2) hue-rotate(180deg) saturate(2.4)}
+#e .word{position:absolute;top:13%;font-family:var(--fd);font-weight:600;font-size:clamp(46px,8vw,128px);letter-spacing:-.045em;line-height:.85}
+#e .eng .word{left:5%;color:#cfe2ff}
+#e .des .word{right:5%;text-align:right;color:var(--blush)}
+#e .word small{display:block;font-family:var(--fm);font-weight:400;font-size:12px;letter-spacing:.12em;text-transform:uppercase;opacity:.7;margin-bottom:10px}
+#e code{position:absolute;font-family:var(--fm);font-size:clamp(11px,.95vw,13.5px);background:#0b1a33d9;border:1px solid #7fb4ff33;border-radius:8px;padding:8px 10px;color:#cfe2ff;white-space:pre;line-height:1.5}
+#e .note{position:absolute;font-family:var(--fh);font-size:clamp(22px,2vw,30px);color:var(--blush);line-height:1;max-width:240px}
+#e .note::after{content:"";display:block;width:60px;height:2px;background:var(--blush);opacity:.6;margin-top:6px;transform:rotate(-4deg)}
+#e .handle{position:absolute;top:56px;bottom:0;left:var(--x);width:2px;margin-left:-1px;background:#fff;z-index:5;cursor:ew-resize}
+#e .handle button{position:absolute;top:58%;left:50%;transform:translate(-50%,-50%);width:54px;height:54px;border-radius:50%;border:0;background:#fff;color:var(--ink);font-size:18px;box-shadow:0 10px 30px -8px #000a;cursor:ew-resize;display:grid;place-items:center}
+#e .cap{position:absolute;z-index:6;left:50%;top:70px;transform:translateX(-50%);font-family:var(--fm);font-size:12px;letter-spacing:.1em;text-transform:uppercase;background:#ffffffe6;color:var(--ink);border-radius:999px;padding:6px 12px;white-space:nowrap}
+
+/* ---------- F: head scan ---------- */
+#f{background:radial-gradient(120% 90% at 50% 40%,#7a2214 0,#4a0e0a 50%,#1f0605 100%);--lx:50%;--ly:38%;--lr:130px}
+#f .stage{position:absolute;left:50%;bottom:0;transform:translateX(-50%);height:calc(100% - 70px);aspect-ratio:3/4;max-width:100vw}
+#f .skin,#f .inside{position:absolute;inset:0}
+#f .skin img{width:100%;height:100%;object-fit:cover;object-position:50% 20%;-webkit-mask-image:linear-gradient(to top,transparent 0,#000 14%);mask-image:linear-gradient(to top,transparent 0,#000 14%)}
+#f .inside{clip-path:circle(var(--lr) at var(--lx) var(--ly));background:#f2ede1;background-image:linear-gradient(#17171a14 1px,transparent 1px);background-size:100% 26px;color:var(--ink)}
+#f .inside .n{position:absolute;font-family:var(--fh);font-size:clamp(18px,2.2vh,26px);line-height:1;text-decoration:none;color:var(--ink);max-width:44%}
+#f .inside .n u{text-decoration-color:var(--coral);text-decoration-thickness:2px}
+#f .inside .n small{display:block;font-family:var(--fm);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--v);margin-top:3px}
+#f .inside svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+#f .ring{position:absolute;left:0;top:0;width:calc(var(--lr)*2);height:calc(var(--lr)*2);margin:calc(var(--lr)*-1) 0 0 calc(var(--lr)*-1);border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 6px #ffffff26,0 20px 40px -10px #000a;pointer-events:none;z-index:4}
+#f .ring::after{content:"SCANNING";position:absolute;left:50%;bottom:-26px;transform:translateX(-50%);font-family:var(--fm);font-size:10px;letter-spacing:.14em;color:#fff}
+#f .side{position:absolute;z-index:5;top:96px;left:clamp(16px,5vw,72px);max-width:340px}
+#f .side .name{font-size:clamp(44px,6vw,92px)}
+#f .side p{margin:12px 0 0;opacity:.8;font-size:15px}
+
+@media (max-width:760px){
+ #c{grid-template-columns:1fr;align-items:start}
+ #c .pc{position:absolute;inset:auto 0 0 0;height:55vh;opacity:.55}
+ #c .mono{position:relative;z-index:2;padding:28px 16px 140px}
+ #c .log{min-height:13em;background:#1f0605cc}
+ .sticky{width:130px;font-size:20px}.shotc{width:170px}.polaroid{width:110px}.scribble{font-size:24px;width:170px}.wire{width:150px}
+ #e .eng code:nth-of-type(n+3),#e .des .note:nth-of-type(n+3){display:none}
+ #f .side{top:72px}
+ #f{--lr:90px}
+}
+@media (prefers-reduced-motion:reduce){#c .caret{animation:none}}
+</style>
+
+<nav class="picker" aria-label="Concepts">
+  <b>Mind hero ideas</b>
+  <a href="#c">C · Inner monologue</a>
+  <a href="#d">D · Mind canvas</a>
+  <a href="#e">E · Two minds</a>
+  <a href="#f">F · Head scan</a>
+  <a href="index.html">Current site ↗</a>
+</nav>
+
+<!-- C -->
+<section class="idea" id="c" aria-label="Concept C: inner monologue">
+  <div class="pc"><img src="images/saad-portrait.jpg" alt="Saad Rana"><span class="bubble" aria-hidden="true"></span></div>
+  <div class="mono">
+    <div class="eyebrow">You're reading Saad's thoughts, live</div>
+    <h1 class="name">Saad Rana</h1>
+    <div class="log" id="clog" aria-live="polite"></div>
+    <div class="asks" id="casks">
+      <button type="button" data-a="0">What are you thinking about right now?</button>
+      <button type="button" data-a="1">How do you choose between two designs?</button>
+      <button type="button" data-a="2">Show me something you built yourself.</button>
+      <button type="button" data-a="3">What do you do when a number looks wrong?</button>
+    </div>
+  </div>
+  <div class="tag"><b>C · Inner monologue</b>Saad's thoughts type out on their own. Visitors ask a question, and the answer streams in and ends in a link to the project that proves it.<small>Strength: feels personal, and shows how you reason. Risk: it's text-heavy.</small></div>
+</section>
+
+<!-- D -->
+<section class="idea" id="d" aria-label="Concept D: mind canvas">
+  <div class="hd"><div class="eyebrow" style="color:var(--muted)">This is my head on a normal Tuesday</div><h2 class="name">Saad Rana</h2><p>Move things around. Click a screen to open the project.</p></div>
+  <div id="dcanvas"></div>
+  <div class="tag"><b>D · Mind canvas</b>A Figma-style board of everything in your head: sticky notes, wireframes, product screens and a polaroid of you. Visitors drag things around, and screens open the case study.<small>Strength: pure designer, playful, very you. Risk: messy if it has too many items.</small></div>
+</section>
+
+<!-- E -->
+<section class="idea" id="e" aria-label="Concept E: two minds">
+  <div class="lay eng">
+    <div class="word"><small>Left side of my head</small>Engineer</div>
+    <div class="ph"><img src="images/saad-portrait.jpg" alt=""></div>
+    <code style="left:6%;top:46%">score = reach*.35 + volume*.25
+      + persistence*.25 + intensity*.15</code>
+    <code style="left:9%;top:62%">if (contrast(brand) &lt; 4.5)
+  suggest(nearestShade(brand))</code>
+    <code style="left:4%;top:78%">drift &gt; 5.0 ? showMoveCard() : null</code>
+  </div>
+  <div class="lay des">
+    <div class="word"><small>Right side of my head</small>Designer</div>
+    <div class="ph"><img src="images/saad-portrait.jpg" alt="Saad Rana"></div>
+    <div class="note" style="right:7%;top:46%">make the trade-off visible</div>
+    <div class="note" style="right:10%;top:62%">colour never carries meaning alone</div>
+    <div class="note" style="right:6%;top:78%">design the states people actually hit</div>
+  </div>
+  <div class="cap" id="ecap">Drag through my head</div>
+  <div class="handle" id="ehandle"><button type="button" aria-label="Drag to compare engineer and designer" id="ebtn">⇆</button></div>
+  <div class="tag"><b>E · Two minds</b>You have a CS degree and you design. Drag the line through your face: one side shows the engineer (the real formulas from your projects), the other shows the designer (your real principles).<small>Strength: one clear message, and the most memorable of the four. Risk: none of your project screens appear in the hero.</small></div>
+</section>
+
+<!-- F -->
+<section class="idea" id="f" aria-label="Concept F: head scan">
+  <div class="side"><div class="eyebrow">Move the scanner over my head</div><h2 class="name">Saad Rana</h2><p>Product designer with a computer science degree. Here's what's in there.</p></div>
+  <div class="stage" id="fstage">
+    <div class="skin"><img src="images/saad-portrait.jpg" alt="Saad Rana"></div>
+    <div class="inside" id="finside">
+      <svg viewBox="0 0 300 400" preserveAspectRatio="none" aria-hidden="true"><path d="M70 120 C110 60 190 60 230 120" stroke="#ff5a3c" stroke-width="1.4" fill="none" stroke-dasharray="4 5"/><path d="M90 200 C140 170 170 230 215 190" stroke="#17171a55" stroke-width="1.2" fill="none"/></svg>
+      <a class="n" href="index.html#outlook" style="left:16%;top:12%"><u>Can I build it to find out?</u><small>→ Signal Desk</small></a>
+      <a class="n" href="index.html#throughput" style="left:54%;top:18%"><u>Write the trade-off down.</u><small>→ DevLake</small></a>
+      <a class="n" href="index.html#shortlist" style="left:12%;top:30%"><u>What happens when it breaks?</u><small>→ BenchPrep</small></a>
+      <a class="n" href="index.html#kanz" style="left:56%;top:34%"><u>Rules before screens.</u><small>→ Kanz</small></a>
+      <a class="n" href="index.html#quantus" style="left:20%;top:46%"><u>Show me the number.</u><small>→ Quantus Health</small></a>
+      <a class="n" href="index.html#chakor" style="left:56%;top:50%"><u>Ship it. Let them judge.</u><small>→ The Chakor</small></a>
+    </div>
+    <div class="ring" id="fring" aria-hidden="true"></div>
+  </div>
+  <div class="tag"><b>F · Head scan</b>An X-ray lens follows the cursor. Over your head, it reveals the notebook inside: six handwritten thoughts, each one a link to the project that proves it.<small>Strength: a literal "look inside my mind", and it's quick. Risk: on a phone the lens wanders on its own, so it's less tactile there.</small></div>
+</section>
+
+<script>
+(()=>{
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+/* picker highlight */
+const links=[...document.querySelectorAll('.picker a[href^="#"]')];
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id))}),{threshold:.5});
+document.querySelectorAll('.idea').forEach(s=>io.observe(s));
+
+/* ---------- C ---------- */
+const log=document.getElementById('clog');
+const ANS=[
+ [['q','> what are you thinking about right now?'],['me','Why 104 people rage-clicked the same page, and whether the fix is a design change or a bug.'],['me','I built a tool so I would never have to guess that again: <a href="index.html#outlook">Signal Desk →</a>']],
+ [['q','> how do you choose between two designs?'],['me','I don\'t pick in my head. I put three options side by side and write the trade-off under each one.'],['me','The team decides on reasons, not taste: <a href="index.html#throughput">DevLake →</a>']],
+ [['q','> show me something you built yourself.'],['me','Designed it, coded it, shipped it, then audited my own build for contrast and accessibility.'],['me','Next.js, an in-browser AI model, no API key: <a href="index.html#outlook">Signal Desk →</a>']],
+ [['q','> what do you do when a number looks wrong?'],['me','I trust it less, and I say so on the screen. Every number shows when it is from and where it came from.'],['me','Rules a user can check in one line: <a href="index.html#kanz">Kanz →</a>']]];
+const intro=[['me','Okay. Someone is reading this.'],['me','Who loses if this ships wrong? That\'s the first thing I ask.'],['q','Ask me something below.']];
+let busy=false;
+function type(lines,done){busy=true;document.querySelectorAll('#casks button').forEach(b=>b.disabled=true);let li=0;
+ const next=()=>{if(li>=lines.length){busy=false;document.querySelectorAll('#casks button').forEach(b=>b.disabled=b.dataset.used==='1');log.querySelector('.caret')?.remove();log.insertAdjacentHTML('beforeend','<span class="caret"></span>');done&&done();return;}
+  const [cls,html]=lines[li++];log.querySelector('.caret')?.remove();const p=document.createElement('p');p.className=cls;log.appendChild(p);
+  if(reduce){p.innerHTML=html;next();return;}
+  const tmp=document.createElement('div');tmp.innerHTML=html;const txt=tmp.textContent;let k=0;const cur=document.createElement('span');cur.className='caret';
+  const t=setInterval(()=>{k+=2;p.textContent=txt.slice(0,k);p.appendChild(cur);if(k>=txt.length){clearInterval(t);p.innerHTML=html;setTimeout(next,380);}},22);};
+ next();}
+type(intro);
+document.getElementById('casks').addEventListener('click',e=>{const b=e.target.closest('button');if(!b||busy)return;b.dataset.used='1';
+ const old=[...log.children];if(old.length>7)old.slice(0,old.length-4).forEach(x=>x.remove());type(ANS[+b.dataset.a]);});
+
+/* ---------- D ---------- */
+const dc=document.getElementById('dcanvas'),dsec=document.getElementById('d');
+const ITEMS=[
+ ['sticky','Who loses if this ships wrong?',6,30,-4],
+ ['shot','images/signaldesk-main.png','Signal Desk','2026','outlook',62,24,3],
+ ['polaroid','',40,62,-6],
+ ['shot','images/kanz-dashboard.png','Kanz','2026','kanz',8,58,-3],
+ ['sticky p','Write the trade-off down.',74,58,5],
+ ['wire','user mgmt · option B',22,40,2],
+ ['shot','images/devlake-connections.png','DevLake','2025–26','throughput',70,74,-2],
+ ['scribble','rules before screens →',44,36,-3],
+ ['shot','images/benchprep-interviews-dashboard.png','BenchPrep','2025–26','shortlist',30,76,4],
+ ['sticky b','Show me the number.',84,36,-5],
+ ['sticky g','Ship it. Let them judge.',4,82,3],
+ ['shot','images/chakor-home.jpg','The Chakor','2025','chakor',52,80,-4]];
+dc.innerHTML=ITEMS.map((t,i)=>{const [k]=t;let h='',x,y,r;
+ if(k.startsWith('sticky')){h=`<div class="it sticky ${k.split(' ')[1]||''}">${t[1]}</div>`;[x,y,r]=t.slice(2);}
+ else if(k==='shot'){h=`<div class="it shotc" data-go="${t[4]}"><div class="im" style="background-image:url('${t[1]}')"></div><span>${t[2]} <em>${t[3]}</em></span></div>`;[x,y,r]=t.slice(5);}
+ else if(k==='polaroid'){h=`<div class="it polaroid"><img src="images/saad-portrait.jpg" alt="Saad"><i>me, thinking</i></div>`;[x,y,r]=t.slice(2);}
+ else if(k==='wire'){h=`<div class="it wire"><b>${t[1]}</b><i></i><i></i><i></i><i></i></div>`;[x,y,r]=t.slice(2);}
+ else {h=`<div class="it scribble">${t[1]}</div>`;[x,y,r]=t.slice(2);}
+ return h.replace('class="it','style="left:'+x+'%;top:'+y+'%;transform:rotate('+r+'deg)" class="it');}).join('');
+let drag=null,z=10;
+dc.addEventListener('pointerdown',e=>{const it=e.target.closest('.it');if(!it)return;e.preventDefault();it.setPointerCapture(e.pointerId);
+ const r=it.getBoundingClientRect(),s=dsec.getBoundingClientRect();drag={it,dx:e.clientX-r.left,dy:e.clientY-r.top,sx:e.clientX,sy:e.clientY,moved:false,s};it.classList.add('drag');it.style.zIndex=++z;});
+dc.addEventListener('pointermove',e=>{if(!drag)return;const {it,dx,dy,s}=drag;if(Math.abs(e.clientX-drag.sx)+Math.abs(e.clientY-drag.sy)>4)drag.moved=true;
+ it.style.left=(e.clientX-s.left-dx)+'px';it.style.top=(e.clientY-s.top-dy)+'px';});
+const end=e=>{if(!drag)return;const {it,moved}=drag;it.classList.remove('drag');drag=null;if(!moved&&it.dataset.go)location.href='index.html#'+it.dataset.go;};
+dc.addEventListener('pointerup',end);dc.addEventListener('pointercancel',end);
+
+/* ---------- E ---------- */
+const es=document.getElementById('e'),cap=document.getElementById('ecap');
+const setX=p=>{p=Math.max(4,Math.min(96,p));es.style.setProperty('--x',p+'%');cap.textContent=p<30?'Mostly engineer':p>70?'Mostly designer':'Both, at the same time';};
+let ed=false;
+const ex=e=>{const r=es.getBoundingClientRect();setX((e.clientX-r.left)/r.width*100);};
+document.getElementById('ehandle').addEventListener('pointerdown',e=>{ed=true;e.target.setPointerCapture?.(e.pointerId);});
+es.addEventListener('pointermove',e=>{if(ed)ex(e);else if(e.pointerType==='mouse'&&!matchMedia('(hover:none)').matches)ex(e);});
+addEventListener('pointerup',()=>ed=false);
+document.getElementById('ebtn').addEventListener('keydown',e=>{const cur=parseFloat(getComputedStyle(es).getPropertyValue('--x'))||50;if(e.key==='ArrowLeft'){setX(cur-5);e.preventDefault();}if(e.key==='ArrowRight'){setX(cur+5);e.preventDefault();}});
+setX(50);
+
+/* ---------- F ---------- */
+const fs=document.getElementById('f'),stg=document.getElementById('fstage'),ring=document.getElementById('fring');
+const lens=(x,y)=>{const r=stg.getBoundingClientRect();fs.style.setProperty('--lx',(x-r.left)+'px');fs.style.setProperty('--ly',(y-r.top)+'px');ring.style.transform=`translate(${x-r.left}px,${y-r.top}px)`;};
+let touchedAt=0;
+fs.addEventListener('pointermove',e=>{touchedAt=performance.now();lens(e.clientX,e.clientY);});
+fs.addEventListener('pointerdown',e=>{touchedAt=performance.now();lens(e.clientX,e.clientY);});
+const wander=t=>{if(t-touchedAt>4000){const r=stg.getBoundingClientRect();lens(r.left+r.width*(.5+.18*Math.sin(t/1400)),r.top+r.height*(.32+.12*Math.sin(t/1900)));}if(!reduce)requestAnimationFrame(wander);};
+requestAnimationFrame(wander);
+})();
+</script>
