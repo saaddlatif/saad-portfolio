@@ -581,6 +581,31 @@ body.cur-on .mp{display:block}
 .pin .tile .ffront b{font-family:var(--f-display);font-weight:600;font-size:clamp(12px,1.05vw,16px);letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pin .tile .ffront small{font:9.5px var(--f-mono);opacity:.7;white-space:nowrap}
 @media (prefers-reduced-motion:reduce){.pin .tile .tpaper{transition:none}}
+
+/* case gallery as a tabbed folder */
+.ffile{--fb:#8b8c7a;--ft:#1d1d1b;position:relative;margin-top:30px}
+.ftabs{display:flex;gap:0;padding-left:10px;overflow-x:auto;scrollbar-width:none;position:relative;z-index:2}
+.ftabs::-webkit-scrollbar{display:none}
+.ft{position:relative;flex:none;margin-left:-6px;margin-bottom:-1px;border:0;cursor:pointer;display:inline-flex;gap:8px;align-items:baseline;padding:10px 18px 9px;border-radius:10px 10px 0 0;
+ background:color-mix(in srgb,var(--fb) 72%,#000 0%);color:var(--ft);opacity:.62;font-size:13.5px;font-weight:500;white-space:nowrap;transition:opacity .2s,transform .2s;transform:translateY(4px);
+ box-shadow:inset 0 -6px 8px -6px #0003}
+.ft small{font:10.5px var(--f-mono);letter-spacing:.06em;opacity:.7}
+.ft:first-child{margin-left:0}
+.ft:hover{opacity:.85;transform:translateY(1px)}
+.ft.on{opacity:1;transform:none;z-index:2;box-shadow:none}
+.ft,.fpanes{background-color:var(--fb);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.fpanes{position:relative;border-radius:0 12px 12px 12px;padding:18px;box-shadow:0 24px 40px -28px #0008}
+.fpane{display:none}
+.fpane.on{display:block;animation:pullout .45s cubic-bezier(.2,.8,.2,1)}
+@keyframes pullout{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.fgal .fpane .stage{background:#0000001a;margin:0}
+.fgal .stage+.stage{margin-top:0}
+.fnav{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:10px;font-size:13px;color:var(--muted)}
+.fcount{font:11.5px var(--f-mono);letter-spacing:.04em}
+.fnext{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:7px 14px;font-size:13.5px;cursor:pointer}
+.fnext:hover{border-color:var(--ink)}
+@media (prefers-reduced-motion:reduce){.fpane.on{animation:none}.ft{transition:none}}
+@media (max-width:760px){.sec{grid-template-columns:minmax(0,1fr)}.fpanes{padding:10px}.ft{padding:9px 14px 8px;font-size:12.5px}}
 .fold.lit{animation:lit 1.4s ease}@keyframes lit{0%,100%{box-shadow:6px 0 14px -6px #0006}30%{box-shadow:0 0 0 3px var(--coral),0 0 40px 6px #ff5a3c66}}
 
 .mindlbl{position:absolute;left:50%;top:clamp(78px,11vh,120px);transform:translateX(-50%);z-index:6;font:500 11.5px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--blush);opacity:.85;white-space:nowrap}
@@ -869,8 +894,18 @@ CASES.find(c=>c.id==='kanz').img=[IMGS.kzDash,IMGS.kzCopilot,IMGS.kzExplore];
 CASES.find(c=>c.id==='quantus').img=['images/quantus-showcase.png','images/quantus-dashboard.png'];
 CASES.find(c=>c.id==='chakor').tc=['c','Live website · thechakor.com','The Chakor','Designed and shipped in six weeks'];
 CASES.find(c=>c.id==='chakor').img=['images/chakor-home.jpg','images/chakor-company.jpg','images/chakor-product-templates.jpg'];
+const shotName=src=>{const f=src.split('/').pop().replace(/\.(png|jpe?g|webp)$/,'').replace(/^(signal-?desk|benchprep|devlake|kanz|quantus|chakor)-/,'').replace(/-/g,' ');const g=f.replace(/\bpsx\b/i,'PSX').replace(/\bai\b/i,'AI');return g.charAt(0).toUpperCase()+g.slice(1);};
+window.fileShow=(f,k)=>{f.querySelectorAll('.ft').forEach(t=>{const on=t.dataset.k===String(k);t.classList.toggle('on',on);t.setAttribute('aria-selected',on)});
+ f.querySelectorAll('.fpane').forEach(p=>p.classList.toggle('on',p.dataset.k===String(k)));
+ const n=f.querySelectorAll('.ft').length,fc=f.querySelector('.fcount'),fx=f.querySelector('.fnext');if(fc)fc.textContent=n+' screen'+(n>1?'s':'')+' in this file';if(fx)fx.hidden=n<2;};
+document.addEventListener('click',e=>{const t=e.target.closest('.ffile .ft');if(t){fileShow(t.closest('.ffile'),t.dataset.k);return;}
+ const nx=e.target.closest('.ffile .fnext');if(nx){const f=nx.closest('.ffile'),ks=[...f.querySelectorAll('.ft')].map(x=>x.dataset.k),cur=f.querySelector('.ft.on')?.dataset.k;fileShow(f,ks[(ks.indexOf(cur)+1)%ks.length]);}});
 const TCV={outlook:'s',shortlist:'b',throughput:'d',kanz:'k',quantus:'q',chakor:'c'};
 window.imgMiss=function(img){
+  const pane=img.closest('.fpane');
+  if(pane){const f=pane.closest('.ffile'),k=pane.dataset.k;pane.remove();f.querySelector(`.ft[data-k="${k}"]`)?.remove();
+   if(!f.querySelector('.fpane')){f.closest('section')?.remove();return;}
+   fileShow(f,(f.querySelector('.fpane.on')||f.querySelector('.fpane')).dataset.k);return;}
   const item=img.closest('.gallery .stage,.rfig');
   if(item){const sec=item.closest('section');item.remove();if(sec&&!sec.querySelector('.stage,.rfig'))sec.remove();return;}
   const src=img.getAttribute('src'),c=CASES.find(x=>x.img&&x.img[0]===src),fr=img.closest('.frame');
@@ -1036,7 +1071,11 @@ function openCase(i){
   csCrumb.innerHTML=`Work / <b>${c.n}</b>`;
   const next=CASES[(i+1)%CASES.length];
   const secs=c.secs.map(renderSec);
-  if(c.img){const k=c.secs.findIndex(s=>s.dec);secs.splice(k+1,0,`<section class="sec gallery"><div class="eyebrow">The product</div><div><h3>More screens from the live product</h3>${c.img.slice(1).map(s=>`<div class="stage">${imgFrame(s).replace(' loading="lazy"','')}</div>`).join('')}</div></section>`);}
+  if(c.img){const k=c.secs.findIndex(s=>s.dec);const fp=FPAL[i%FPAL.length];const L=c.img.slice(1);
+   secs.splice(k+1,0,`<section class="sec gallery fgal"><div class="eyebrow">The product</div><div><h3>More screens from the live product</h3>
+   <div class="ffile" style="--fb:${fp[0]};--ft:${fp[1]}"><div class="ftabs" role="tablist" aria-label="Screens">${L.map((s,n)=>`<button type="button" role="tab" class="ft${n?'':' on'}" data-k="${n}" aria-selected="${!n}" data-cur="Open this screen" style="--n:${n}"><small>${String(n+1).padStart(2,'0')}</small>${shotName(s)}</button>`).join('')}</div>
+   <div class="fpanes">${L.map((s,n)=>`<div class="fpane${n?'':' on'}" role="tabpanel" data-k="${n}"><div class="stage">${imgFrame(s).replace(' loading="lazy"','')}</div></div>`).join('')}</div>
+   <div class="fnav"><span class="fcount">${L.length} screen${L.length>1?'s':''} in this file</span>${L.length>1?'<button type="button" class="fnext" data-cur="Next screen">Next screen →</button>':''}</div></div></div></section>`);}
   if(c.research){secs.splice(1,0,`<section class="sec gallery research"><div class="eyebrow">Research and planning</div><div><h3>What I worked out before the screens</h3>${c.research.map(r=>`<figure class="rfig"><div class="rimg"><img src="${r[0]}" alt="" onerror="imgMiss(this)"></div><figcaption>${r[1]}</figcaption></figure>`).join('')}</div></section>`);}
   if(c.scr){const k=c.secs.findIndex(s=>s.dec);secs.splice(k+1,0,`<section class="sec gallery"><div class="eyebrow">The product</div><div><h3>A second screen from the rebuild</h3><div class="stage"><div class="frame"><div class="chrome"><i></i><i></i><i></i></div>${shotHTML(c.scr[1])}</div></div></div></section>`);}
   csBody.innerHTML=`<div class="cs-head"><div class="eyebrow">Case study · Client work</div><h1 id="csTitle">${c.n}</h1><p class="lede">${c.k}</p>
