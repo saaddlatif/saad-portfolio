@@ -523,6 +523,8 @@ body.cur-on .mp{display:block}
 .fspine small{font:11px var(--f-mono);letter-spacing:.06em;opacity:.7}
 .fbody{position:absolute;left:100px;right:22px;top:22px;bottom:22px;display:grid;grid-template-rows:minmax(0,1fr) auto;gap:18px;opacity:0;visibility:hidden;transition:opacity .25s,visibility 0s .25s}
 .fold.on .fbody{opacity:1;visibility:visible;transition:opacity .35s .2s,visibility 0s}
+.fold:not(.on) .fbody{display:none}
+.fold.on .fbody{animation:fbin .45s .15s both}@keyframes fbin{from{opacity:0}to{opacity:1}}
 .fshot{min-height:0;display:block}
 .fshot .stage{display:block;height:100%;aspect-ratio:auto;border-radius:10px;background:#00000014;padding:4% 5% 0}
 .fshot .stage.type{padding:0}
